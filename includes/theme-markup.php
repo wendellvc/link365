@@ -2,13 +2,13 @@
 /**
  * Theme markup customizations.
  *
- * @package   Boilerplate\Theme
+ * @package   WDC\Theme
  * @author    Craig Simpson <craig.simpson@intimation.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @copyright MIT
  */
 
-namespace Boilerplate\Theme;
+namespace WDC\Theme;
 
 add_action( 'genesis_setup', __NAMESPACE__ . '\\theme_markup', 20 );
 /**
@@ -31,7 +31,7 @@ function theme_markup() {
 
 }
 
-add_action( 'genesis_doctype', __NAMESPACE__ . '\\boilerplate_do_doctype' );
+add_action( 'genesis_doctype', __NAMESPACE__ . '\\wdc_do_doctype' );
 /**
  * Add no-js class to html tag, and immediately remove it with JS.
  *
@@ -41,11 +41,11 @@ add_action( 'genesis_doctype', __NAMESPACE__ . '\\boilerplate_do_doctype' );
  *
  * @return void
  */
-function boilerplate_do_doctype() {
+function wdc_do_doctype() {
 	include locate_template( 'template-parts/doctype.php' );
 }
 
-add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\boilerplate_lazy_load_images' );
+add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\wdc_lazy_load_images' );
 /**
  * Filter in the new loading attribute on images.
  *
@@ -53,7 +53,7 @@ add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\boilerplate
  *
  * @return array
  */
-function boilerplate_lazy_load_images( $attributes ) {
+function wdc_lazy_load_images( $attributes ) {
 	return array_merge( $attributes, [
 		'loading' => 'lazy'
 	] );

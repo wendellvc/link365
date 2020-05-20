@@ -30,10 +30,10 @@ const uglify = require('gulp-uglify');
 const config = {
 	manifest: 'assets.json',
 	project: {
-		name: 'Boilerplate',
-		textDomain: 'boilerplate',
+		name: 'WDC',
+		textDomain: 'wdc',
 		destPath: 'develop/languages/',
-		localURL: 'https://boilerplate.localhost'
+		localURL: 'https://wdc.localhost'
 	},
 	scss: [
 		{
@@ -50,9 +50,9 @@ const config = {
 	js: [
 		{
 			src: [
-				'develop/js/boilerplate.js'
+				'develop/js/wdc.js'
 			],
-			destFileName: 'boilerplate.js',
+			destFileName: 'wdc.js',
 			destPath: 'assets/js/'
 		}
 	]

@@ -2,13 +2,13 @@
 /**
  * Theme scripts and styles.
  *
- * @package   Boilerplate\Theme
+ * @package   WDC\Theme
  * @author    Craig Simpson <craig.simpson@intimation.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @copyright MIT
  */
 
-namespace Boilerplate\Theme;
+namespace WDC\Theme;
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 /**
@@ -22,12 +22,12 @@ function enqueue_scripts() {
 
 	wp_register_style( 'normalize', asset( 'css/normalize.css' ), false, '8.0.0' );
 	wp_register_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,700', [], CHILD_THEME_VERSION );
-	wp_enqueue_style( 'boilerplate', asset( 'css/style.css' ), [
+	wp_enqueue_style( 'wdc', asset( 'css/style.css' ), [
 		'normalize',
 		'google-fonts',
 	], CHILD_THEME_VERSION );
 
-	wp_enqueue_script( 'boilerplate', asset( 'js/boilerplate.js' ), [], CHILD_THEME_VERSION, true );
+	wp_enqueue_script( 'wdc', asset( 'js/wdc.js' ), [], CHILD_THEME_VERSION, true );
 
 }
 

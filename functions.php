@@ -2,7 +2,7 @@
 /**
  * Theme Functions.
  *
- * @package   Boilerplate\Theme
+ * @package   WDC\Theme
  * @author    Craig Simpson <craig.simpson@intimation.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @license   MIT
@@ -16,13 +16,13 @@
  *
  */
 
-namespace Boilerplate\Theme;
+namespace WDC\Theme;
 
-define( 'CHILD_THEME_NAME', 'Boilerplate' );
-define( 'CHILD_THEME_URL', 'https://intimation.dev/boilerplate/theme' );
+define( 'CHILD_THEME_NAME', 'WDC' );
+define( 'CHILD_THEME_URL', 'https://intimation.dev/wdc/theme' );
 define( 'CHILD_THEME_VERSION', '0.1.0' );
 
-load_child_theme_textdomain( 'boilerplate', get_stylesheet_directory() . '/languages' );
+load_child_theme_textdomain( 'wdc', get_stylesheet_directory() . '/languages' );
 
 include_once __DIR__ . '/includes/theme-setup.php';
 include_once __DIR__ . '/includes/theme-markup.php';

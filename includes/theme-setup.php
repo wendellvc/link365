@@ -2,13 +2,13 @@
 /**
  * Theme setup.
  *
- * @package   Boilerplate\Theme
+ * @package   WDC\Theme
  * @author    Craig Simpson <craig.simpson@intimation.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @copyright MIT
  */
 
-namespace Boilerplate\Theme;
+namespace WDC\Theme;
 
 add_action( 'genesis_setup', __NAMESPACE__ . '\\theme_setup', 15 );
 /**
@@ -29,7 +29,7 @@ function theme_setup() {
 		],
 		'genesis-footer-widgets'      => 4,
 		'genesis-menus'               => [
-			'primary' => __( 'Primary Menu', 'boilerplate' ),
+			'primary' => __( 'Primary Menu', 'wdc' ),
 		],
 		'genesis-responsive-viewport' => null,
 		'genesis-structural-wraps'    => [
