@@ -33,11 +33,15 @@ const config = {
 		name: 'WDC',
 		textDomain: 'wdc',
 		destPath: 'develop/languages/',
-		localURL: 'https://wdc.localhost'
+		localURL: 'https://wdc.test/'
 	},
 	scss: [
 		{
-			src: 'develop/scss/style.scss',
+			src: [
+				'develop/vendor/swiper/css/swiper.min.css',
+				'develop/scss/global.scss',
+				'develop/scss/style.scss'
+			],
 			destFileName: 'style.css',
 			destPath: 'assets/css/'
 		},
@@ -50,6 +54,8 @@ const config = {
 	js: [
 		{
 			src: [
+				'develop/vendor/swiper/js/swiper.min.js',
+				'develop/vendor/bootstrap/js/bootstrap.min.js',
 				'develop/js/wdc.js'
 			],
 			destFileName: 'wdc.js',

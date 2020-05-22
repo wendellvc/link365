@@ -1,0 +1,43 @@
+
+a, * { text-decoration: none!important; }
+img, picture { color: $color-default-white; }
+
+/** header **/
+header { position: sticky; background-color: #005470; backdrop-filter: saturate(180%) blur(20px); }
+
+
+
+/** content **/
+// main { position: relative; top: -117px; }
+.home-page-banner-content-wrapper {  }
+.header-banner-img { height: 820px; background-repeat: no-repeat; background-position: center; background-size: cover; }
+
+
+
+/** footer **/
+.site-footer > p { display: none; }
+.site-footer {
+  .container { padding-top: 66px; padding-bottom: 90px; font-weight: 500; }
+  .back-to-top { font-weight: 700; padding: 35px 0; background-color: #004a62; }
+}
+.logo-address-wrapper {
+  margin-bottom: 25px;
+  .textwidget { margin-top: 30px; }
+  .address { font-size: 16px; line-height: 1.3; }
+}
+
+.separator { margin: 0 10px; }
+.contact_label { margin-right: 10px; }
+
+.copyright-tm-company-registration-wrapper { font-size: 16px; line-height: 1.3; }
+
+.footer-socials-wrapper {
+  .textwidget {
+    margin: 35px 0 40px; display: flex; justify-content: center;
+
+    a { width: 43px; height: 43px; background-color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    a:nth-child(even) { margin: 0 20px; }
+    i { color: #005470; }
+  }
+  .textwidget:last-child { margin: 20px 0 0; font-size: 14px; font-weight: 400; }
+}

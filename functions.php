@@ -6,7 +6,7 @@
  * @author    Craig Simpson <craig.simpson@intimation.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @license   MIT
- * 
+ *
  *
  *   _       _   _                 _   _
  *  (_)_ __ | |_(_)_ __ ___   __ _| |_(_) ___  _ __
@@ -27,3 +27,4 @@ load_child_theme_textdomain( 'wdc', get_stylesheet_directory() . '/languages' );
 include_once __DIR__ . '/includes/theme-setup.php';
 include_once __DIR__ . '/includes/theme-markup.php';
 include_once __DIR__ . '/includes/theme-assets.php';
+include_once __DIR__ . '/includes/theme-page-builder.php';
