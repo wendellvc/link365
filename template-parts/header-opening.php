@@ -10,4 +10,4 @@
 
 <div class="site-header-wrapper">
 	<div class="container">
-		<nav class="navbar navbar-expand-lg">
+		<nav class="navbar navbar-expand-md position-relative">

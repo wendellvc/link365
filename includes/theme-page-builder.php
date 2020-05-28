@@ -53,9 +53,10 @@ function wdc_output_flex_body_class( $classes ) {
 function wdc_output_flex_content() {
 	$post_id = get_the_ID();
 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
-	foreach ( $wdc_page_builder as $count => $row_type ) {
 
-		switch ( $row_type ) {
+	foreach ( $wdc_page_builder as $count => $layout ) {
+
+		switch ( $layout ) {
 			case 'header_banner':
 				include locate_template( 'template-parts/flex-content/header-banner.php');
 				break;
@@ -64,6 +65,18 @@ function wdc_output_flex_content() {
 				break;
 			case 'contact_form':
 				include locate_template( 'template-parts/flex-content/contact-form.php');
+				break;
+			case 'intro_content':
+				include locate_template( 'template-parts/flex-content/intro-heading.php');
+				break;
+			case 'column_grids':
+				include locate_template( 'template-parts/flex-content/column-grids.php');
+				break;
+			case 'boxes_with_ctas':
+				include locate_template( 'template-parts/flex-content/boxes-ctas.php');
+				break;
+			case 'tabs_with_ctas':
+				include locate_template( 'template-parts/flex-content/tabs.php');
 				break;
 		}
 

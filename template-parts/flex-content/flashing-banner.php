@@ -11,10 +11,14 @@
 
  if( $show ) :
 ?>
+<section id="flashing-banner" class="alert alert-dismissible fade show mb-0 rounded-0" role="alert">
 
-<section id="flashing-banner" class="flex-content flex-content--flashing-banner flash-banner">
-	<div class="container">
-    <?php echo wp_kses_post( wpautop( $details ) ); ?>
+    <div class="container position-relative d-flex flex-column align-items-center">
+      <?php echo wp_kses_post( wpautop( $details ) ); ?>
+
+      <button type="button" class="close p-0" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
   </div>
 </section>
 

@@ -13,7 +13,7 @@
     // 'container'       => 'div',
     'container_class' => 'collapse navbar-collapse',
     'container_id'    => 'navbar_menu_content',
-    'menu_class'      => 'navbar-nav mr-auto',
+    'menu_class'      => 'navbar-nav ml-auto',
     'menu_id'         => '',
     // 'echo'            => true,
     // 'fallback_cb'     => 'wp_page_menu',
@@ -31,11 +31,22 @@
   );
 
 ?>
+      <div id="btn_toggler_menu_wrapper" class="d-flex flex-column align-items-end float-right w-100">
+        <div class="header-socials-wrapper">
+        <?php
+    			if( is_active_sidebar('header-links-socials') ) {
+    				dynamic_sidebar('header-links-socials');
+    			}
+    		?>
+        </div>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_menu_content" aria-controls="navbar_menu_content" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <?php wp_nav_menu( $args ); ?>
+        <div class="navbar-wrapper w-100">
+        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar_menu_content" aria-controls="navbar_menu_content" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars text-white"></i>
+        </button>
+        <?php wp_nav_menu( $args ); ?>
+        </div>
+      </div>
     </nav>
   </div>
 </div>

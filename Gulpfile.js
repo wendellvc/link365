@@ -55,7 +55,6 @@ const config = {
 		{
 			src: [
 				'develop/vendor/swiper/js/swiper.min.js',
-				'develop/vendor/bootstrap/js/bootstrap.min.js',
 				'develop/js/wdc.js'
 			],
 			destFileName: 'wdc.js',
@@ -206,4 +205,5 @@ function watch() {
 	gulp.watch('develop/scss/**/*.scss', gulp.series(css, reload));
 	gulp.watch('develop/js/*.js', gulp.series(js, reload));
 	gulp.watch('develop/images/*', gulp.series(images, reload));
+	gulp.watch('develop/vendor/*', gulp.series(js, reload));
 }

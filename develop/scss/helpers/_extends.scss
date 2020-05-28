@@ -1,0 +1,122 @@
+.d-flex {
+  display: flex!important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.text-white { color: $color-default-white; }
+.text-center { text-align: center; }
+
+.justify-content-center { justify-content: center!important; } 
+
+.float-right { float: right!important; }
+
+.position-relative {
+    position: relative!important;
+}
+
+.position-absolute {
+    position: absolute!important;
+}
+
+.w-100 {
+    width: 100%!important;
+}
+
+.mr-auto, .mx-auto {
+    margin-right: auto!important;
+}
+
+.ml-auto, .my-auto {
+    margin-left: auto!important;
+}
+
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+
+.p-0 {
+    padding: 0!important;
+}
+
+.align-items-center {
+    align-items: center!important;
+}
+
+.align-items-end {
+    align-items: flex-end!important;
+}
+
+.flex-column {
+    flex-direction: column!important;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+
+.rounded-0 {
+    border-radius: 0!important;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+  transition-property: height, visibility;
+  -webkit-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+
+.alert-dismissable,
+.alert-dismissible {
+  padding-right: 35px;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+.fade {
+    transition: opacity .15s linear;
+}
+
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
