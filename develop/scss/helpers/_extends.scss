@@ -2,6 +2,10 @@
   display: flex!important;
 }
 
+.d-inline-block {
+  display: inline-block!important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -9,10 +13,11 @@
 .text-white { color: $color-default-white; }
 .text-center { text-align: center; }
 
-.justify-content-center { justify-content: center!important; } 
+.justify-content-center { justify-content: center!important; }
 
+.float-left { float: left!important; }
 .float-right { float: right!important; }
-
+.clear { clear: both; }
 .position-relative {
     position: relative!important;
 }
@@ -33,6 +38,7 @@
     margin-left: auto!important;
 }
 
+.m-auto { margin-left: auto!important; margin-right: auto!important; }
 .mb-0, .my-0 {
     margin-bottom: 0!important;
 }

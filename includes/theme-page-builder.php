@@ -78,6 +78,21 @@ function wdc_output_flex_content() {
 			case 'tabs_with_ctas':
 				include locate_template( 'template-parts/flex-content/tabs.php');
 				break;
+			case 'left_vertical_slides':
+				include locate_template( 'template-parts/flex-content/left-vertical-slides.php');
+				break;
+			case 'right_vertical_slides':
+				include locate_template( 'template-parts/flex-content/right-vertical-slides.php');
+				break;
+			case 'divider':
+				include locate_template( 'template-parts/flex-content/divider.php');
+				break;
+			case 'divider_thin':
+				include locate_template( 'template-parts/flex-content/divider-thin.php');
+				break;
+			// case 'blog_contents':
+			// 	include locate_template( 'template-parts/flex-content/blog-contents.php');
+			// 	break;
 		}
 
 	}

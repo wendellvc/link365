@@ -17,7 +17,7 @@
   <div class="container">
 
     <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
-    
+
     <div class="d-flex justify-content-center">
     <?php for ( $i = 0; $i < $boxes; $i++ ) {
       $icon = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_image', true );
@@ -34,7 +34,7 @@
 
   <?php if( !empty($cta_label) ): ?>
     <div class="call_to_action justify-content-center position-absolute">
-      <a href="<?php echo $cta_url; ?>" class="btn btn_cta bg-full"><?php echo $cta_label; ?></a>
+      <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
     </div>
   <?php endif; ?>
   </div>

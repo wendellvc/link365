@@ -17,19 +17,19 @@
 <section class="banner">
   <div class="position-relative">
 
-  	<div class="home-page-banner-content-wrapper position-absolute w-100">
+  	<div class="page-banner-content-wrapper position-absolute w-100">
   		<div class="container">
-      <?php if( is_front_page() ) : ?>
+      <?php //if( is_front_page() ) : ?>
     		<div class="entry-content">
     		<?php
           $post = get_post();
           $content = apply_filters('the_content', $post->post_content);
-          echo $content;
+          echo (!empty($content) ? $content : '<h2>'. get_the_title() .'</h2>' );
         ?>
     		</div>
-      <?php else : ?>
-        <h1><?php echo the_title(); ?></h1>
-      <?php endif; ?>
+      <?php //else : ?>
+        <!-- <h1><?php //echo the_title(); ?></h1> -->
+      <?php //endif; ?>
     	</div>
   	</div>
 

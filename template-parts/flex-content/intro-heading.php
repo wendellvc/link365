@@ -13,6 +13,17 @@
 
 <section <?php echo $id; ?> class="intro-heading spacer">
   <div class="container position-relative text-center">
-    <?php echo wp_kses_post( wpautop( $intro ) ); ?>
+  <?php
+    echo wp_kses_post( wpautop( $intro ) );
+
+    /*
+    **
+    **  Validates if there is a CSS ID being set on the Intro Heading
+    **  if there is, and is equal to the WDC blog, then display blog category posts
+    */
+    if( $css_id == 'wdc_blog' ) {
+      include locate_template( 'template-parts/flex-content/blog-contents.php');
+    }
+  ?>
   </div>
 </section>

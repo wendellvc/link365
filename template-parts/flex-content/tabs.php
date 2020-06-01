@@ -44,7 +44,7 @@ $tabs = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_tabs', true );
             <div class="tab-content">
               <div class="tab-title text-center"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
               <div class="text-center"><?php echo wp_kses_post( wpautop( $details ) ); ?></div>
-              <div class="call_to_action d-flex justify-content-center"><a href="<?php echo $cta_url; ?>" class="btn btn_cta bg-full"><?php echo $cta_label; ?></a></div>
+              <div class="call_to_action d-flex justify-content-center"><a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a></div>
             </div>
           </div>
         </div>
