@@ -10,6 +10,18 @@
 (function ($) {
  	'use strict';
 
+  $('.collapse').collapse('hide');
+
+  var prevHeight = $('.site-header').height();
+  $('.navbar-toggler').on('click', function(){
+    if( $('.site-header').hasClass('addedNavbar') ) {
+      $('.site-header').removeClass('addedNavbar');
+    } else {
+      $('.site-header').addClass('addedNavbar');
+    }
+  });
+
+
   /********************************************
    * Benefit tabs slides.
    ********************************************/

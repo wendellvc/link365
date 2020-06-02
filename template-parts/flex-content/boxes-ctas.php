@@ -13,6 +13,8 @@
   $download_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_download', true );
   $download_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_download_url', true );
 
+  $when_hovered = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_when_hovered', true );
+
   $ctr = 1;
 ?>
 
@@ -33,9 +35,7 @@
       $img = wp_get_attachment_image_url( $icon, 'full' );
       ?>
       <div class="box-wrapper position-relative <?php echo ( $boxes > 3 ? 'float-left' : '' ) . ( $ctr == 1 ? ' first' : ( $ctr == 2 ? ' middle' : ( $ctr == 3 ? ' last' : '' ) ) ); ?>">
-        <div class="box box-shadow text-center <?php echo ( $img ? '' : ' bgorange' ); ?>">
-        <?php
-          if( $img ) : ?>
+        <div class="box box-shadow text-center">
 
           <img src="<?php echo $img; ?>">
 
@@ -53,13 +53,10 @@
             </a>
           </div>
         <?php
-            endif;
-          else:
-        ?>
-          <div class="subtitle"><?php echo wp_kses_post( wpautop( $text ) ); ?></div>
-        <?php
-          endif;
-        ?>
+            endif; ?>
+        </div>
+        <div class="box-hover bgorange position-absolute">
+          <?php echo wp_kses_post( wpautop( $when_hovered ) ); ?>
         </div>
       </div>
     <?php

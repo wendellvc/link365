@@ -19,7 +19,7 @@
         <?php echo wp_kses_post( wpautop( $details ) ); ?>
         <?php if( $dismissable ) : ?>
         <button type="button" class="close p-0" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/close.png" alt="Close"></span>
+          <span aria-hidden="true"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/svg/close.svg" alt="Close"></span>
         </button>
         <?php endif; ?>
     </div>
