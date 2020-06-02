@@ -11,7 +11,7 @@
 
   /* get posts from Blog category */
   $posts = get_posts( $args );
-
+  $ctr = 1;
 ?>
 
 <div id="blog-section" class="">
@@ -21,7 +21,7 @@
       foreach ( $posts as $post ) : setup_postdata( $post );
         $featured_img_url = get_the_post_thumbnail_url($post->ID, 'full');
     ?>
-      <div class="box-wrapper position-relative">
+      <div class="box-wrapper position-relative<?php echo ( $ctr == 1 ? ' first' : ( $ctr == 2 ? ' middle' : ( $ctr == 3 ? ' last' : '' ) ) ); ?>">
         <div class="box box-shadow text-center">
             <img src="<?php echo $featured_img_url; ?>">
             <div class="the_title text-white"><?php echo get_the_title(); ?></div>
@@ -47,6 +47,8 @@
         </div>
       </div>
     <?php
+        $ctr++;
+        $ctr = ( $ctr > 3 ? 1 : $ctr );
       endforeach;
       wp_reset_postdata(); ?>
     </div>

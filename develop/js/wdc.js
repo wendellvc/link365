@@ -44,6 +44,7 @@
    ********************************************/
   var slides_swiper = new Swiper('.slides-container', {
       direction: 'vertical',
+      loop: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
