@@ -14,11 +14,13 @@
   $slides = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_slides', true );
 ?>
 
-<section id="right_vertical_slides" class="position-relative">
+<section id="right_vertical_slides" class="spacer position-relative">
   <div class="container">
     <div class="right-wrapper d-flex align-items-center position-relative">
       <div class="box-col text-wrap ml-auto">
+      <?php if( $icon ) : ?>
         <img src="<?php echo wp_get_attachment_image_url( $icon, 'full' ); ?>">
+      <?php endif; ?>
         <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
         <div class="subtitle"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
         <div class="subtext"><?php echo wp_kses_post( wpautop( $subtext ) ); ?></div>

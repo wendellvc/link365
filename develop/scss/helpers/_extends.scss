@@ -12,6 +12,7 @@
 
 .text-white { color: $color-default-white; }
 .text-center { text-align: center; }
+.text-left { text-align: left; }
 
 .justify-content-center { justify-content: center!important; }
 
@@ -29,7 +30,7 @@
 .w-100 {
     width: 100%!important;
 }
-
+.mt-1 { margin-top: 1rem; }
 .mr-auto, .mx-auto {
     margin-right: auto!important;
 }

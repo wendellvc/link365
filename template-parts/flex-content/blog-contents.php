@@ -2,7 +2,7 @@
 
   /**
   * Partial: Blog posts
-  *
+  * was included in the intro-heading with validation to check the blog ID and then display
   * @var int $post_id Post ID
   */
 

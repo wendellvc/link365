@@ -21,9 +21,11 @@
 <section id="boxes_with_ctas" class="position-relative <?php echo ( $boxes > 3 ? 'products_list' : 'spacer ' ); ?>">
   <div class="container">
 
-    <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
+    <?php if( $intro ) : ?>
+      <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
+    <?php endif; ?>
 
-    <div class="<?php echo ( $boxes > 3 ? 'text-center products' : 'd-flex justify-content-center' ); ?> position-relative">
+    <div class="<?php echo ( $boxes > 3 ? 'text-center products' : 'd-flex justify-content-center services' ); ?> position-relative">
 
     <?php for ( $i = 0; $i < $boxes; $i++ ) {
       $icon = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_image', true );
@@ -44,7 +46,9 @@
           <?php else : ?>
           <div class="product_title"><?php echo $title; ?></div>
           <?php endif; ?>
-
+          <?php if( $text ) : ?>
+          <div class="subtitle"><?php echo wp_kses_post( wpautop( $text ) ); ?></div>
+        <?php endif; ?>
           <div class="subtext"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
           <?php if( $link ) : ?>
           <div class="call_to_action justify-content-center">

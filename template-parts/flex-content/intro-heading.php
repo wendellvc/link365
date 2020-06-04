@@ -13,9 +13,11 @@
 
 <section <?php echo $id; ?> class="intro-heading spacer">
   <div class="container position-relative text-center">
-  <?php
-    echo wp_kses_post( wpautop( $intro ) );
+  <?php if( $intro ) : ?>
+    <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
+  <?php endif; ?>
 
+    <?php
     /*
     **
     **  Validates if there is a CSS ID being set on the Intro Heading

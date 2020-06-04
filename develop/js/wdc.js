@@ -43,13 +43,27 @@
    * Vertical slides.
    ********************************************/
   var slides_swiper = new Swiper('.slides-container', {
-      direction: 'vertical',
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
+    direction: 'vertical',
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+
+  var gallery_swiper = new Swiper('.gallery-container', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    // loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    // },
+  });
 
   /* when nav-tab is clicked, it should switch on the corresponding pagination dot/bullet */
   $('.nav_tab').on('click', function(e) {

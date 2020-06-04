@@ -6,30 +6,52 @@
  * @var string $wdc_page_builder Name of current flex content row.
  */
 
+  $id_attr = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_id_attribute', true );
+  $cl_attr = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_class_attribute', true );
   $intro = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_intro_text', true );
   $boxes = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes', true );
   $cta_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_label', true );
   $cta_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_url', true );
 
+  $ctr = 1;
 ?>
 
-<section id="column_grids" class="spacer position-relative">
+<section <?php echo ( $id_attr ? 'id="'.$id_attr.'"' : 'id="column_grids"' ) . ( $cl_attr ? 'class="'.$cl_attr.' spacer position-relative' : 'class="spacer position-relative"' ); ?>>
   <div class="container">
 
     <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
 
-    <div class="d-flex justify-content-center">
-    <?php for ( $i = 0; $i < $boxes; $i++ ) {
+    <div class="<?php echo ( $boxes > 3 ? 'col' : 'd-flex justify-content-center' ) ?>">
+    <?php
+    for ( $i = 0; $i < $boxes; $i++ ) {
+
       $icon = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_image', true );
       $title = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_title', true );
       $subtitle = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_subtext', true );
-      ?>
+
+      if( $id_attr ) :
+        if ( $boxes > 3 ) :
+          if ( $ctr == 1 ) :
+            echo '<div class="row">';
+          endif;
+          endif;
+      endif; ?>
       <div class="img-wrapper text-center">
         <img src="<?php echo wp_get_attachment_image_url( $icon, 'full' ); ?>">
-        <div class="title"><?php echo $title; ?></div>
+        <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
         <div class="subtext"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
       </div>
-    <?php } ?>
+    <?php
+      if( $id_attr ) :
+        if ( $boxes > 3 ) :
+          if ( $ctr == 3 ) :
+            echo '</div>';
+          endif;
+        endif;
+      endif;
+      $ctr++;
+      $ctr = ( $ctr > 3 ? 1 : $ctr );
+    } ?>
     </div>
 
   <?php if( !empty($cta_label) ): ?>

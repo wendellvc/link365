@@ -90,9 +90,18 @@ function wdc_output_flex_content() {
 			case 'divider_thin':
 				include locate_template( 'template-parts/flex-content/divider-thin.php');
 				break;
-			// case 'blog_contents':
-			// 	include locate_template( 'template-parts/flex-content/blog-contents.php');
-			// 	break;
+			case 'left_content':
+				include locate_template( 'template-parts/flex-content/left-vertical-content.php');
+				break;
+			case 'right_content':
+				include locate_template( 'template-parts/flex-content/right-vertical-content.php');
+				break;
+			case 'dynamic_boxes':
+				include locate_template( 'template-parts/flex-content/boxes-dynamic.php');
+				break;
+			case 'gallery':
+				include locate_template( 'template-parts/flex-content/gallery.php');
+				break;
 		}
 
 	}
