@@ -102,6 +102,12 @@ function wdc_output_flex_content() {
 			case 'gallery':
 				include locate_template( 'template-parts/flex-content/gallery.php');
 				break;
+			case 'gallery_with_items':
+				include locate_template( 'template-parts/flex-content/gallery-items.php');
+				break;
+			case 'map':
+				include locate_template( 'template-parts/flex-content/gmap.php');
+				break;
 		}
 
 	}

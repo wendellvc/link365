@@ -5,7 +5,7 @@
 ?>
 
 <div class="box box-shadow text-center <?php echo $cl_attr; ?>">
-  <img src="<?php echo $img; ?>">
+  <img src="<?php echo $img; ?>" class="img-responsive">
   <div class="main-title"><?php echo $title; ?></div>
   <div class="subtitle"><?php echo $subtitle; ?></div>
   <div class="subtext"><?php echo wp_kses_post( wpautop( $subtext ) ); ?></div>

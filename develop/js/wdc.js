@@ -65,6 +65,20 @@
     // },
   });
 
+  var gallery_swiper = new Swiper('.gallery_items-container', {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    // loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    // },
+  });
+
   /* when nav-tab is clicked, it should switch on the corresponding pagination dot/bullet */
   $('.nav_tab').on('click', function(e) {
     e.preventDefault();

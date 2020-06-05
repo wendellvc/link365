@@ -33,6 +33,7 @@
     <?php
     $engineer = '';
     $examiner = '';
+    $ctr = 1;
     for ( $i = 0; $i < $boxes; $i++ ) :
       /* check if classification is profile then use toggler */
       $profile = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_profile', true );
@@ -44,6 +45,9 @@
       $profile_link = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_cta_link', true );
 
       $img = wp_get_attachment_image_url( $image, 'full' );
+      if ( $ctr == 1 ) :
+        echo '<div class="row">';
+      endif;
 
       if( $profile ) :
         if( $profile == 'engineer' ) :
@@ -54,14 +58,20 @@
 
     <?php else :
       /* user the default boxes display */ ?>
-      <div class="default-boxes">
+      <div class="default-boxes <?php echo ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ); ?>">
         <?php include locate_template( 'template-parts/flex-content/box.php'); ?>
       </div>
 
     <?php
     endif; ?>
 
-    <?php endfor; ?>
+    <?php
+    if ( $ctr == 3 ) :
+      echo '</div>';
+    endif;
+    $ctr++;
+    $ctr = ( $ctr > 3 ? 1 : $ctr );
+    endfor; ?>
 
     </div>
 

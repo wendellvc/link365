@@ -1,6 +1,9 @@
 .d-flex {
   display: flex!important;
 }
+.d-block {
+  display: block!important;
+}
 
 .d-inline-block {
   display: inline-block!important;
@@ -30,6 +33,7 @@
 .w-100 {
     width: 100%!important;
 }
+.ml-1 { margin-left: 1rem; }
 .mt-1 { margin-top: 1rem; }
 .mr-auto, .mx-auto {
     margin-right: auto!important;
