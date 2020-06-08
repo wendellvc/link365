@@ -17,6 +17,7 @@
 ?>
 
 <section id="<?php echo $id_attr; ?>" class="position-relative <?php echo ( $boxes > 3 ? 'products_list' : 'spacer ' ); ?>">
+<section id="<?php echo ( $id_attr ? $id_attr : 'column_grids' ); ?>" class="<?php echo ( $cl_attr ? $cl_attr.' spacer position-relative' : ( $id_attr == 'boxes_with_ctas' ? 'position-relative products_list' : 'spacer position-relative'  ) ); ?>">
   <div class="container">
 
     <!-- heading and details -->
@@ -28,7 +29,8 @@
     <?php endif; ?>
 
     <!-- Dynamic Boxes -->
-    <div class="dynamic-boxes d-flex justify-content-center">
+    <!-- <div class="dynamic-boxes d-flex justify-content-center"> -->
+    <div class="dynamic-boxes">
 
     <?php
     $engineer = '';

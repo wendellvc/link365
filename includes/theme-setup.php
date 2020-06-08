@@ -79,3 +79,20 @@ function add_image_sizes() {
 	} );
 
 }
+
+function wdc_acf_google_map_api( $api ){
+
+	$api['key'] = 'AIzaSyDPTyrj4PIpTT1uS11c_ST6n7n4VUQl57g';
+
+	return $api;
+
+}
+
+add_filter('acf/fields/google_map/api', __NAMESPACE__ . '\\wdc_acf_google_map_api');
+
+function wdc_acf_init() {
+
+	acf_update_setting('google_api_key', 'AIzaSyDPTyrj4PIpTT1uS11c_ST6n7n4VUQl57g');
+}
+
+add_action('acf/init', __NAMESPACE__ . '\\wdc_acf_init');

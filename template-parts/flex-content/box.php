@@ -5,6 +5,7 @@
 ?>
 
 <div class="box box-shadow text-center <?php echo $cl_attr; ?>">
+  <?php $img = ( $img ? $img : get_stylesheet_directory_uri() .'/assets/images/svg/WDC_AVATAR.svg' ); ?>
   <img src="<?php echo $img; ?>" class="img-responsive">
   <div class="main-title"><?php echo $title; ?></div>
   <div class="subtitle"><?php echo $subtitle; ?></div>

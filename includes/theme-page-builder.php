@@ -99,6 +99,9 @@ function wdc_output_flex_content() {
 			case 'dynamic_boxes':
 				include locate_template( 'template-parts/flex-content/boxes-dynamic.php');
 				break;
+			case 'dynamic_boxes_with_toggle_and_slider':
+				include locate_template( 'template-parts/flex-content/column-grids-with-slider.php');
+				break;
 			case 'gallery':
 				include locate_template( 'template-parts/flex-content/gallery.php');
 				break;
