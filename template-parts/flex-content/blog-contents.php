@@ -23,7 +23,11 @@
     ?>
       <div class="box-wrapper position-relative<?php echo ( $ctr == 1 ? ' first' : ( $ctr == 2 ? ' middle' : ( $ctr == 3 ? ' last' : '' ) ) ); ?>">
         <div class="box box-shadow text-center">
+          <?php if($featured_img_url) : ?>
             <img src="<?php echo $featured_img_url; ?>">
+          <?php else: ?>
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>" class="img-dummy">
+          <?php endif; ?>
             <div class="the_title text-white"><?php echo get_the_title(); ?></div>
 
             <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '. get_the_author(); ?></div>

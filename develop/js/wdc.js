@@ -97,10 +97,13 @@
   $(window).on('resize', function(){
       var width = $(window).width();
       if(width >= 992) {
+          gallery_items_swiper.params.slidesPerView = 3;
           people_swiper.params.slidesPerView = 3;
       } else if(width >= 768) {
+          gallery_items_swiper.params.slidesPerView = 2;
           people_swiper.params.slidesPerView = 2;
       } else {
+          gallery_items_swiper.params.slidesPerView = 1;
           people_swiper.params.slidesPerView = 1;
       }
       // people_swiper.reInit();

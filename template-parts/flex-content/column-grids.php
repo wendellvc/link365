@@ -34,8 +34,8 @@
           if ( $ctr == 1 ) :
             echo '<div class="row w-100 text-center">';
           endif;
-          // endif;
-      endif; ?>
+        endif;
+      // endif; ?>
       <div class="img-wrapper text-center <?php echo ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ); ?>">
         <img src="<?php echo wp_get_attachment_image_url( $icon, 'full' ); ?>">
         <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
@@ -47,8 +47,8 @@
           if ( $ctr == 3 ) :
             echo '</div>';
           endif;
-        // endif;
-      endif;
+        endif;
+      // endif;
       $ctr++;
       $ctr = ( $ctr > 3 ? 1 : $ctr );
     } ?>
