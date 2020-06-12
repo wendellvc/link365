@@ -5,13 +5,17 @@
   * was included in the intro-heading with validation to check the blog ID and then display
   * @var int $post_id Post ID
   */
+  $blog_ID = 20;
+  $cat_ID = 1;
+  $posts_per_page = get_field('posts_per_page', $blog_ID);
 
   global $post;
   global $paged;  // current paginated page
   $args = array(
-    // 'posts_per_page' => 3,
-    'category_name' => 'blog',
-    'paged' => $paged
+    'posts_per_page' => $posts_per_page,
+    // 'category_name' => 'blog',
+    'cat' => $cat_ID,
+    // 'paged' => $paged
   );
 
   /* get posts from Blog category */
@@ -22,7 +26,7 @@
 <section class="listings">
 	<div id="blog-section" class="spacer">
     <div class="container">
-      <div class="position-relative">
+      <div id="ajax_posts" class="position-relative">
       <?php
         foreach ( $posts as $post ) : setup_postdata( $post );
           $featured_img_url = get_the_post_thumbnail_url($post->ID, 'full');
@@ -78,7 +82,13 @@
         endforeach;
         wp_reset_postdata(); ?>
       </div>
-
     </div><!-- container -->
+    <div class="container">
+      <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
+      <div id="msg_notice" class="text-center"></div>
+      <div class="call_to_action d-flex justify-content-center">
+        <a href="javascript:;" id="more_posts" data-catid="<?php echo $cat_ID; ?>" class=" btn btn_cta">Load more</a>
+      </div>
+    </div>
   </div>
 </section>

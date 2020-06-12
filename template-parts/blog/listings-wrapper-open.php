@@ -9,7 +9,7 @@
  */
 
 ?>
-<section id="single-post-section" class="blog-single-post spacer">
+<section id="single-post-section" class="blog-single-post spacer pb-0">
 
 	<div class="breadcrumbs">
 		<div class="container">

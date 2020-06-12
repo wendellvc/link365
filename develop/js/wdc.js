@@ -502,4 +502,43 @@
       var map = initMap( $(this) );
   });
 
+  var ppp = $('#posts_per_page').data('posts');; // Post per page
+  var cat = $('#more_posts').data('catid');;
+  var pageNumber = 1;
+
+  function load_posts() {
+      pageNumber++;
+      var str = 'cat=' + cat + '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=wdc_load_more_post_ajax';
+      // console.log(ajax_posts.ajaxurl); return false;
+      $.ajax({
+          type: "POST",
+          dataType: "html",
+          url: ajax_posts.ajaxurl,
+          data: str,
+          success: function(data) {
+
+            console.log(data);
+
+              var $data = $(data);
+              if($data.length){
+                  $("#ajax_posts").append($data);
+                  $("#more_posts").attr("disabled", false);
+              } else{
+                  $("#more_posts").attr("disabled", true);
+              }
+          },
+          error : function(jqXHR, textStatus, errorThrown) {
+              console.log(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+          }
+
+      });
+      // return false;
+  }
+
+  $("#more_posts").on("click", function(e) { // When btn is pressed.
+      e.preventDefault();
+      $("#more_posts").attr("disabled", true); // Disable the button, temp.
+      load_posts();
+  });
+
 })(jQuery);

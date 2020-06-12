@@ -161,28 +161,7 @@ function wdc_output_posts_wrapper_close() {
 	include locate_template( 'template-parts/blog/listings-wrapper-close.php' );
 }
 
+/* display the previous and nect post */
 add_action( 'genesis_entry_footer', 'genesis_prev_next_post_nav', 12 );
-
-// add_action( 'genesis_before_loop', 'wdc_output_flex_content' );
-// function wdc_output_flex_content() {
-// 	$post_id = get_the_ID();
-//
-// 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
-//
-// 	foreach ( $wdc_page_builder as $count => $layout ) {
-//
-// 		switch ( $layout ) {
-// 			case 'blog_heading':
-// 				include locate_template( 'template-parts/blog/intro-heading.php');
-// 				break;
-// 		}
-//
-// 	}
-// }
-
-
-
-
-
 
 genesis();

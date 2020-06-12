@@ -43,6 +43,89 @@ function enqueue_scripts() {
 	// wp_enqueue_script( 'bootstrap-js', asset( '../develop/vendor/bootstrap/js/bootstrap.min.js'), ['jquery'], CHILD_THEME_VERSION, true );
 	wp_enqueue_script( 'wdc', asset( 'js/wdc.js' ), ['jquery', 'swiper', 'classie', 'collapse', 'google-map'], CHILD_THEME_VERSION, true );
 
+	wp_localize_script( 'wdc', 'ajax_posts', array(
+	  'ajaxurl' => admin_url( 'admin-ajax.php' ),
+	  'noposts' => __('No older posts found', 'wdc'),
+	));
+
+}
+
+add_action('wp_ajax_nopriv_wdc_load_more_post_ajax', __NAMESPACE__ . '\\wdc_load_more_post_ajax');
+add_action('wp_ajax_wdc_load_more_post_ajax', __NAMESPACE__ . '\\wdc_load_more_post_ajax');
+
+if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
+	function wdc_load_more_post_ajax() {
+		$out = '';
+		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
+		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+		$cat = (isset($_POST['cat'])) ? $_POST['cat'] : '';
+		$ctr = 1;
+
+		header("Content-Type: text/html");
+
+		$args = array(
+				// 'suppress_filters' => true,
+				// 'post_type' => 'post',
+				'posts_per_page' => $ppp,
+				'cat' => $cat,
+				'paged'    => $page,
+		);
+
+		$posts = get_posts( $args );
+
+		if ($posts) :
+			foreach ( $posts as $post ) : setup_postdata( $post );
+				$ID = $post->ID;
+				$featured_img_url = get_the_post_thumbnail_url($ID, 'full');
+
+				if ( $ctr == 1 ) :
+					$out .= '<div class="row w-100 text-center">';
+				endif;
+
+				$out .= '<div class=" d-inline-block box-wrapper position-relative '. ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ) .'">
+					<div class="box box-shadow text-center">';
+					if($featured_img_url) :
+						$out .='<img src="'. $featured_img_url .'">';
+					else :
+						$out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
+					endif;
+
+						$headline = get_the_title($ID);
+						$headline = substr($headline, 0, 60);
+
+						$out .= '<div class="the_title text-white">'. $headline .'</div>
+						<div class="date-author">'. get_the_date( 'd/mY',  $ID) .' - by '. get_the_author() .'</div>';
+
+						if( !empty(get_the_excerpt($ID)) ) :
+							$out .= '<div class="content-excerpt">';
+							$excerpt = get_the_excerpt($ID);
+							$excerpt = substr($excerpt, 0, 150);
+							$out .= $excerpt;
+							$out .= '</div>';
+						endif;
+
+						$out .= '<div class="call_to_action justify-content-center">
+							<a href="'. esc_url( get_the_permalink($ID) ) .'" class="bg-less">
+								<span class="btn_arrow"></span>
+							</a>
+						</div>
+					</div>
+				</div>';
+
+				if ( $ctr == 3 ) :
+					$out .= '</div>';
+				endif;
+
+				$ctr++;
+				$ctr = ( $ctr > 3 ? 1 : $ctr );
+
+			endforeach;
+		endif;
+
+		wp_reset_postdata();
+		wp_die($out);
+		ob_clean();
+	}
 }
 
 if ( ! function_exists( 'asset' ) ) {
@@ -67,4 +150,5 @@ if ( ! function_exists( 'asset' ) ) {
 
 		return esc_url( get_stylesheet_directory_uri() . '/assets/' . $path );
 	}
+
 }
