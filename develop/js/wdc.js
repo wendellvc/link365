@@ -502,14 +502,19 @@
       var map = initMap( $(this) );
   });
 
-  var ppp = $('#posts_per_page').data('posts');; // Post per page
-  var cat = $('#more_posts').data('catid');;
+  var ppp = $('#posts_per_page').data('posts'); // Post per page
+  var cat = $('#catid').data('catid');
   var pageNumber = 1;
 
-  function load_posts() {
+  function load_posts(filter_by) {
+
+      cat = ( filter_by != '' ? ( filter_by == 'All' ? '' : filter_by ) : cat );
+      pageNumber = ( filter_by != '' ? 0 : pageNumber++ );
+
       pageNumber++;
+
       var str = 'cat=' + cat + '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=wdc_load_more_post_ajax';
-      // console.log(ajax_posts.ajaxurl); return false;
+
       $.ajax({
           type: "POST",
           dataType: "html",
@@ -517,14 +522,20 @@
           data: str,
           success: function(data) {
 
-            console.log(data);
+            // console.log(data);
 
               var $data = $(data);
               if($data.length){
+                if( filter_by != '' ) {
+                  $("#ajax_posts").html($data);
+                } else {
                   $("#ajax_posts").append($data);
+                }
+
                   $("#more_posts").attr("disabled", false);
               } else{
-                  $("#more_posts").attr("disabled", true);
+                  $("#more_posts").attr("disabled", 'disabled');
+                  $("#msg_notice").html('<div class="alert">No older posts found.</adiv>');
               }
           },
           error : function(jqXHR, textStatus, errorThrown) {
@@ -532,13 +543,25 @@
           }
 
       });
-      // return false;
   }
 
   $("#more_posts").on("click", function(e) { // When btn is pressed.
       e.preventDefault();
-      $("#more_posts").attr("disabled", true); // Disable the button, temp.
-      load_posts();
+      $("#more_posts").attr("disabled", 'disabled'); // Disable the button, temp.
+      load_posts('');
+  });
+
+  $('.btn-secondary').on('click', function(e) {
+    /* setting an active/selected */
+    e.preventDefault();
+    $('.btn-secondary').removeClass('active');
+    $(this).addClass('active');
+    var catid = $(this).find('input').val();
+    var category = $.trim($(this).text());
+    $('#catid').attr("data-catid", catid);
+    catid = ( category == 'All' ? category : catid );
+    load_posts(catid);
+    $("#msg_notice").html('');
   });
 
 })(jQuery);

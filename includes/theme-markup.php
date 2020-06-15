@@ -252,6 +252,16 @@ function register_custom_widgets() {
 	   'before_title'  => '',
 	   'after_title'   => '',
 	) );
+
+	register_sidebar( array(
+	   'name'          => __( 'Share Button' ),
+	   'id'            => 'btn-share',
+	   'description'   => __( 'Widgets in this area will be shown on single post.' ),
+	   'before_widget' => '',
+	   'after_widget'  => '',
+	   'before_title'  => '',
+	   'after_title'   => '',
+	) );
 }
 
 

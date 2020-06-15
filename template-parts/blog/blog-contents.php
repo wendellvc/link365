@@ -14,8 +14,14 @@
   $args = array(
     'posts_per_page' => $posts_per_page,
     // 'category_name' => 'blog',
-    'cat' => $cat_ID,
+    // 'cat' => $cat_ID,
     // 'paged' => $paged
+  );
+
+  $categories = get_categories( array(
+    'orderby' => 'name',
+    'order'   => 'ASC'
+    )
   );
 
   /* get posts from Blog category */
@@ -25,7 +31,31 @@
 ?>
 <section class="listings">
 	<div id="blog-section" class="spacer">
+
+    <!-- FILTER BY CATEGORIES -->
     <div class="container">
+      <div class="filter-by-category text-center mb-1">
+        <img src="<?php echo get_stylesheet_directory_uri(). '/assets/images/svg/SMALL_ICON_FILTER.svg'; ?>" class="filter_by_icon">
+      </div>
+      <div class="categories-list text-center mb-2">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="categoryid" value="" class="opt_category" checked> All
+          </label>
+
+        <?php
+        foreach( $categories as $category ) :  ?>
+          <label class="btn btn-secondary">
+            <input type="radio" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
+          </label>
+        <?php endforeach; ?>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
       <div id="ajax_posts" class="position-relative">
       <?php
         foreach ( $posts as $post ) : setup_postdata( $post );
@@ -40,7 +70,7 @@
             <?php if($featured_img_url) : ?>
               <img src="<?php echo $featured_img_url; ?>">
             <?php else: ?>
-              <img src="<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC Logo_Marker.svg'; ?>" class="img-dummy">
+              <img src="<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC_Logo_Marker.svg'; ?>" class="img-dummy">
             <?php endif; ?>
             <?php
               $headline = get_the_title();
@@ -81,13 +111,18 @@
           $ctr = ( $ctr > 3 ? 1 : $ctr );
         endforeach;
         wp_reset_postdata(); ?>
-      </div>
+
+      </div><!-- ajax_posts -->
+
     </div><!-- container -->
+
+    <!-- LOAD MORE POSTS -->
     <div class="container">
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
       <div id="msg_notice" class="text-center"></div>
       <div class="call_to_action d-flex justify-content-center">
-        <a href="javascript:;" id="more_posts" data-catid="<?php echo $cat_ID; ?>" class=" btn btn_cta">Load more</a>
+        <input type="hidden" id="catid">
+        <a href="javascript:;" id="more_posts" class="btn btn_cta">Load more</a>
       </div>
     </div>
   </div>

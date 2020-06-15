@@ -127,11 +127,28 @@ add_action( 'genesis_entry_content', 'wdc_output_blog_content' );
  * @since 0.1.0
  */
 function wdc_output_blog_content() {
+
+	$categories = get_the_category();
+	$list = array();
+	foreach($categories as $cat) {
+		$list[] = $cat->name;
+	}
+	$list = implode(', ', $list);
 	?>
 	<div class="primary-content mt-1">
-		<div class="category"><?php echo get_the_category()[0]->name; ?></div>
+		<div class="category"><?php echo $list; ?></div>
 		<div class="date-author"><?php echo get_the_date( 'd/mY' ) .' - by '. get_the_author(); ?></div>
 		<div class="mt-1"><?php echo the_content(); ?></div>
+
+		<!-- SHARE BUTTON -->
+		<?php
+			if( is_active_sidebar('btn-share') ) {
+				echo '<div class="shareit-buttons mt-2 mb-2">';
+				dynamic_sidebar('btn-share');
+				echo '</div>';
+			}
+		?>
+
 	</div>
 	<?php
 }
