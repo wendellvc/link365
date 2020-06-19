@@ -3,7 +3,7 @@
  * Theme markup customizations.
  *
  * @package   WDC\Theme
- * @author    Craig Simpson <craig.simpson@intimation.uk>
+ * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @copyright MIT
  */

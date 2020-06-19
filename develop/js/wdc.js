@@ -185,9 +185,6 @@
   *
   * Renders a Google Map onto the selected jQuery element
   *
-  * @date    22/10/19
-  * @since   5.8.6
-  *
   * @param   jQuery $el The jQuery element.
   * @return  object The map instance.
   */
@@ -425,9 +422,6 @@
    *
    * Creates a marker for the given jQuery element and map.
    *
-   * @date    22/10/19
-   * @since   5.8.6
-   *
    * @param   jQuery $el The jQuery element.
    * @param   object The map instance.
    * @return  object The marker instance.
@@ -471,8 +465,6 @@
    *
    * Centers the map showing all markers in view.
    *
-   * @date    22/10/19
-   * @since   5.8.6
    *
    * @param   object The map instance.
    * @return  void
@@ -522,11 +514,9 @@
           data: str,
           success: function(data) {
 
-            // console.log(data);
-
               var $data = $(data);
-              if($data.length){
-                if( filter_by != '' ) {
+              if($data.length) {
+                if( pageNumber == 1 ) {
                   $("#ajax_posts").html($data);
                 } else {
                   $("#ajax_posts").append($data);
@@ -545,16 +535,19 @@
       });
   }
 
+  /*
+  ** Generally for blog posts
+  */
   $("#more_posts").on("click", function(e) { // When btn is pressed.
       e.preventDefault();
       $("#more_posts").attr("disabled", 'disabled'); // Disable the button, temp.
       load_posts('');
   });
 
-  $('.btn-secondary').on('click', function(e) {
+  $('.opt_toggle').on('click', function(e) {
     /* setting an active/selected */
     e.preventDefault();
-    $('.btn-secondary').removeClass('active');
+    $('.opt_toggle').removeClass('active');
     $(this).addClass('active');
     var catid = $(this).find('input').val();
     var category = $.trim($(this).text());
@@ -563,5 +556,61 @@
     load_posts(catid);
     $("#msg_notice").html('');
   });
+
+  /*
+  ** Case Studies and testimonials
+  */
+  var post_type = $('#post_type').val();
+  $("#more_custom_posts").on("click", function(e) { // When btn is pressed.
+      e.preventDefault();
+      $(this).attr("disabled", 'disabled'); // Disable the button, temp.
+      // post_type = $('#post_type').val();
+      load_custom_posts('');
+  });
+
+  $('.opt_posts_toggle').on('click', function(e) {
+    /* setting an active/selected */
+    e.preventDefault();
+    $('.opt_posts_toggle').removeClass('active');
+    $(this).addClass('active');
+    post_type = $(this).find('input').val();
+    $('#post_type').val(post_type);
+    load_custom_posts(post_type);
+    $("#msg_notice").html('');
+  });
+
+  function load_custom_posts(type) {
+    pageNumber = ( type != '' ? 0 : pageNumber++ );
+    pageNumber++;
+    post_type = ( type == '' ? $('#post_type').val() : type );
+    var str = 'post_type=' + post_type + '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=wdc_load_more_post_ajax';
+
+    $.ajax({
+        type: "POST",
+        dataType: "html",
+        url: ajax_posts.ajaxurl,
+        data: str,
+        success: function(data) {
+
+            var $data = $(data);
+            if($data.length) {
+              if( pageNumber == 1 ) {
+                $("#ajax_posts").html($data);
+              } else {
+                $("#ajax_posts").append($data);
+              }
+
+                $("#more_custom_posts").attr("disabled", false);
+            } else {
+              $("#more_custom_posts").attr("disabled", 'disabled');
+              $("#msg_notice").html('<div class="alert">No older posts found.</adiv>');
+            }
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+        }
+
+    });
+  }
 
 })(jQuery);

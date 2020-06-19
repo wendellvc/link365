@@ -3,7 +3,7 @@
  * Theme scripts and styles.
  *
  * @package   WDC\Theme
- * @author    Craig Simpson <craig.simpson@intimation.uk>
+ * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
  * @copyright Copyright (c) 2019, Intimation Creative
  * @copyright MIT
  */
@@ -59,65 +59,87 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
 		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
 		$cat = (isset($_POST['cat'])) ? $_POST['cat'] : '';
+		$post_type = (isset($_POST['post_type'])) ? $_POST['post_type'] : '';
 		$ctr = 1;
 
 		header("Content-Type: text/html");
 
-		$args = array(
-				// 'suppress_filters' => true,
-				// 'post_type' => 'post',
-				'posts_per_page' => $ppp,
-				'cat' => $cat,
-				'paged'    => $page,
-		);
+		if( !empty($post_type) ) :
+			$args = array( 'posts_per_page' => $ppp, 'post_type' => $post_type, 'paged' => $page );
+		else :
+			$args = array( 'posts_per_page' => $ppp, 'cat' => $cat, 'paged' => $page );
+		endif;
 
 		$posts = get_posts( $args );
 
 		if ($posts) :
 			foreach ( $posts as $post ) : setup_postdata( $post );
 				$ID = $post->ID;
-				$featured_img_url = get_the_post_thumbnail_url($ID, 'full');
 
-				if ( $ctr == 1 ) :
-					$out .= '<div class="row w-100 text-center">';
-				endif;
+				/*
+				** FOR TESTIMONIALS
+				*/
+				if( $post_type == 'testimonials' ) {
+						$out .= '<section id="divider_thin">
+						  <div class="container">
+						    <div class="img_quote m-auto"><img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Quote_ORANGE.svg"></div>
+						    <div class="divider-thin m-auto"></div>
+						  </div>
+						</section>';
+						$out .= '<div class="row w-100 text-center testimonial">';
+						$out .= '<div class="t_details">'. wp_kses_post( wpautop( $post->post_content ) ) .'</div>';
+						$out .= '<div class="t_logo"><img src="'. get_the_post_thumbnail_url($ID, 'full') .'"></div>';
+						$out .= '</div>';
 
-				$out .= '<div class=" d-inline-block box-wrapper position-relative '. ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ) .'">
-					<div class="box box-shadow text-center">';
-					if($featured_img_url) :
-						$out .='<img src="'. $featured_img_url .'">';
-					else :
-						$out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
+				/*
+				** FOR BLOG POSTS, AND CASE STUDIES
+				*/
+				} else {
+
+					$featured_img_url = get_the_post_thumbnail_url($ID, 'full');
+
+					if ( $ctr == 1 ) :
+						$out .= '<div class="row w-100 text-center">';
 					endif;
 
-						$headline = get_the_title($ID);
-						$headline = substr($headline, 0, 60);
-
-						$out .= '<div class="the_title text-white">'. $headline .'</div>
-						<div class="date-author">'. get_the_date( 'd/mY',  $ID) .' - by '. get_the_author() .'</div>';
-
-						if( !empty(get_the_excerpt($ID)) ) :
-							$out .= '<div class="content-excerpt">';
-							$excerpt = get_the_excerpt($ID);
-							$excerpt = substr($excerpt, 0, 150);
-							$out .= $excerpt;
-							$out .= '</div>';
+					$out .= '<div class=" d-inline-block box-wrapper position-relative '. ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ) .'">
+						<div class="box box-shadow text-center">';
+						if($featured_img_url) :
+							$out .='<img src="'. $featured_img_url .'">';
+						else :
+							$out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
 						endif;
 
-						$out .= '<div class="call_to_action justify-content-center">
-							<a href="'. esc_url( get_the_permalink($ID) ) .'" class="bg-less">
-								<span class="btn_arrow"></span>
-							</a>
+							$headline = get_the_title($ID);
+							$headline = substr($headline, 0, 60);
+
+							$out .= '<div class="the_title text-white">'. $headline .'</div>
+							<div class="date-author">'. get_the_date( 'd/mY',  $ID) .' - by '. get_the_author() .'</div>';
+
+							if( !empty(get_the_excerpt($ID)) ) :
+								$out .= '<div class="content-excerpt">';
+								$excerpt = get_the_excerpt($ID);
+								$excerpt = substr($excerpt, 0, 150);
+								$out .= $excerpt;
+								$out .= '</div>';
+							endif;
+
+							$out .= '<div class="call_to_action justify-content-center">
+								<a href="'. esc_url( get_the_permalink($ID) ) .'" class="bg-less">
+									<span class="btn_arrow"></span>
+								</a>
+							</div>
 						</div>
-					</div>
-				</div>';
+					</div>';
 
-				if ( $ctr == 3 ) :
-					$out .= '</div>';
-				endif;
+					if ( $ctr == 3 ) :
+						$out .= '</div>';
+					endif;
 
-				$ctr++;
-				$ctr = ( $ctr > 3 ? 1 : $ctr );
+					$ctr++;
+					$ctr = ( $ctr > 3 ? 1 : $ctr );
+
+				}
 
 			endforeach;
 		endif;

@@ -28,3 +28,6 @@ include_once __DIR__ . '/includes/theme-setup.php';
 include_once __DIR__ . '/includes/theme-markup.php';
 include_once __DIR__ . '/includes/theme-assets.php';
 include_once __DIR__ . '/includes/theme-page-builder.php';
+// Include php files from includes folder
+include_once __DIR__ . '/template-parts/cpt/case-studies.php';
+include_once __DIR__ . '/template-parts/cpt/testimonials.php';

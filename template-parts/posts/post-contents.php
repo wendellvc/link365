@@ -1,18 +1,28 @@
 <?php
 
   /**
-  * Partial: Blog posts
+  * Partial: Posts and Custom Post Types
   * was included in the intro-heading with validation to check the blog ID and then display
   * @var int $post_id Post ID
   */
-  $blog_ID = 20;
+
+  $id = get_the_ID();
+  /*
+  ** 14 is the Work Page
+  ** 20 is the Blog Page
+  ** if page ID is not equal to the Blog page ID, then set to the current page ID, else set to Blog Page ID
+  */
+  $post_ID = ( $id == 14 ? $id : 20 );
   $cat_ID = 1;
-  $posts_per_page = get_field('posts_per_page', $blog_ID);
+  $posts_for = str_replace(' ', '_', strtolower(get_field('posts_for', $post_ID)));
+  $posts_per_page = get_field('posts_per_page', $post_ID);
+  $post_type = ( $posts_for == 'case_studies' ? 'case-studies' : '' );
 
   global $post;
   global $paged;  // current paginated page
   $args = array(
     'posts_per_page' => $posts_per_page,
+    'post_type' => $post_type,
     // 'category_name' => 'blog',
     // 'cat' => $cat_ID,
     // 'paged' => $paged
@@ -29,7 +39,7 @@
 
   $ctr = 1;
 ?>
-<section class="listings">
+<section id="<?php echo $posts_for; ?>" class="listings">
 	<div id="blog-section" class="spacer">
 
     <!-- FILTER BY CATEGORIES -->
@@ -39,17 +49,27 @@
       </div>
       <div class="categories-list text-center mb-2">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-secondary active">
+        <?php if( $posts_for == 'case_studies' ) : ?>
+          <label class="btn opt_posts_toggle btn-secondary active">
+            <input type="radio" name="post_type" value="case-studies" class="opt_post_type"> Case Studies
+            <!-- <a href="work">Case Studies</a> -->
+          </label>
+          <label class="btn opt_posts_toggle btn-secondary">
+            <input type="radio" name="post_type" value="testimonials" class="opt_post_type"> Testimonials
+            <!-- <a href="/work/testimonials/">Testimonials</a> -->
+          </label>
+        <?php else : ?>
+          <label class="btn opt_toggle btn-secondary active">
             <input type="radio" name="categoryid" value="" class="opt_category" checked> All
           </label>
 
         <?php
         foreach( $categories as $category ) :  ?>
-          <label class="btn btn-secondary">
+          <label class="btn opt_toggle btn-secondary">
             <input type="radio" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
           </label>
         <?php endforeach; ?>
-
+      <?php endif; ?>
         </div>
       </div>
     </div>
@@ -121,8 +141,12 @@
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
       <div id="msg_notice" class="text-center"></div>
       <div class="call_to_action d-flex justify-content-center">
+      <?php if( $posts_for == 'case_studies' ) : ?>
+        <input type="hidden" id="post_type" value="<?php echo $post_type; ?>">
+      <?php else : ?>
         <input type="hidden" id="catid">
-        <a href="javascript:;" id="more_posts" class="btn btn_cta">Load more</a>
+      <?php endif; ?>
+        <a href="javascript:;" id="<?php echo ( $posts_for == 'case_studies' ? 'more_custom_posts' : 'more_posts' ); ?>" class="btn btn_cta">Load more</a>
       </div>
     </div>
   </div>

@@ -72,13 +72,13 @@ function wdc_output_flex_content() {
 
 		switch ( $layout ) {
 			case 'header_banner':
-				include locate_template( 'template-parts/blog/banner.php');
+				include locate_template( 'template-parts/posts/banner.php');
 				break;
 			case 'blog_heading':
-				include locate_template( 'template-parts/blog/intro-heading.php');
+				include locate_template( 'template-parts/posts/intro-heading.php');
 				break;
 			case 'blog_contents':
-				include locate_template( 'template-parts/blog/blog-contents.php');
+				include locate_template( 'template-parts/posts/post-contents.php');
 				break;
 		}
 

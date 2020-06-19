@@ -13,7 +13,7 @@
 $gallery = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_images', true );
 
 ?>
-<section id="gallery" class="spacer gallery-container">
+<section id="gallery" class="spacer">
 
   <div class="container position-relative">
 

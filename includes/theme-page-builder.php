@@ -111,6 +111,12 @@ function wdc_output_flex_content() {
 			case 'map':
 				include locate_template( 'template-parts/flex-content/gmap.php');
 				break;
+			case 'blog_heading':
+				include locate_template( 'template-parts/posts/intro-heading.php');
+				break;
+			case 'blog_contents':
+				include locate_template( 'template-parts/posts/post-contents.php');
+				break;
 		}
 
 	}
