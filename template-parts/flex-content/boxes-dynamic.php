@@ -51,21 +51,21 @@
         echo '<div class="row">';
       endif;
 
-      if( $profile ) :
-        if( $profile == 'engineer' ) :
-          $engineer .= locate_template( 'template-parts/flex-content/box.php');
-        elseif ($profile == 'examiner') :
-          $examiner .= locate_template( 'template-parts/flex-content/box.php');
-        endif; ?>
+      // if( $profile ) :
+      //   if( $profile == 'engineer' ) :
+      //     $engineer .= locate_template( 'template-parts/flex-content/box.php');
+      //   elseif ($profile == 'examiner') :
+      //     $examiner .= locate_template( 'template-parts/flex-content/box.php');
+      //   endif; ?>
 
-    <?php else :
+    <?php // else :
       /* user the default boxes display */ ?>
       <div class="default-boxes <?php echo ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ); ?>">
         <?php include locate_template( 'template-parts/flex-content/box.php'); ?>
       </div>
 
     <?php
-    endif; ?>
+    // endif; ?>
 
     <?php
     if ( $ctr == 3 ) :

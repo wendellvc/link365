@@ -10,6 +10,8 @@
   $title = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_title', true );
   $subtitle = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtitle', true );
   $subtext = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtext', true );
+  $cta_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_label', true );
+  $cta_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_url', true );
 
   $slides = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_slides', true );
 ?>
@@ -24,6 +26,11 @@
         <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
         <div class="subtitle"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
         <div class="subtext"><?php echo wp_kses_post( wpautop( $subtext ) ); ?></div>
+        <?php if( !empty($cta_label) ): ?>
+          <div class="call_to_action">
+            <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="box-col img-wrap slides-container mr-auto">
         <div class="swiper-wrapper position-relative">
@@ -39,12 +46,6 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-
-  <?php if( !empty($cta_label) ): ?>
-    <div class="call_to_action">
-      <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
-    </div>
-  <?php endif; ?>
 
   </div>
 </section>

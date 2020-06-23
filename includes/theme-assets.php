@@ -91,6 +91,13 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 						$out .= '<div class="t_logo"><img src="'. get_the_post_thumbnail_url($ID, 'full') .'"></div>';
 						$out .= '</div>';
 
+
+				/*
+				** FOR CAREERS
+				*/
+				} elseif ( $post_type == 'careers' ) {
+
+
 				/*
 				** FOR BLOG POSTS, AND CASE STUDIES
 				*/
@@ -105,15 +112,17 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 					$out .= '<div class=" d-inline-block box-wrapper position-relative '. ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ) .'">
 						<div class="box box-shadow text-center">';
 						if($featured_img_url) :
-							$out .='<img src="'. $featured_img_url .'">';
+							// $out .='<img src="'. $featured_img_url .'">';
+							$out .='<div class="img_box" style="background-image: url('. $featured_img_url .');"></div>';
 						else :
-							$out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
+							// $out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
+							$out .= '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg);"></div>';
 						endif;
 
 							$headline = get_the_title($ID);
 							$headline = substr($headline, 0, 60);
 
-							$out .= '<div class="the_title text-white">'. $headline .'</div>
+							$out .= '<div class="'. ( $post_type == 'case-studies' ? 'title' : 'the_title text-white' ) .'">'. $headline .'</div>
 							<div class="date-author">'. get_the_date( 'd/mY',  $ID) .' - by '. get_the_author() .'</div>';
 
 							if( !empty(get_the_excerpt($ID)) ) :

@@ -7,6 +7,14 @@
   */
 
   $id = get_the_ID();
+
+  $post = get_post($post_id);
+  $slug = $post->post_name;
+  if( $slug == 'careers' ) {
+    include locate_template( 'template-parts/flex-content/careers.php');
+
+  } else {
+
   /*
   ** 14 is the Work Page
   ** 20 is the Blog Page
@@ -41,12 +49,12 @@
 ?>
 <section id="<?php echo $posts_for; ?>" class="listings">
 	<div id="blog-section" class="spacer">
-
+    <?php if( $posts_for == 'case_studies' ) : ?>
     <!-- FILTER BY CATEGORIES -->
     <div class="container">
-      <div class="filter-by-category text-center mb-1">
-        <img src="<?php echo get_stylesheet_directory_uri(). '/assets/images/svg/SMALL_ICON_FILTER.svg'; ?>" class="filter_by_icon">
-      </div>
+      <!--<div class="filter-by-category text-center mb-1">
+        <img src="<?php //echo get_stylesheet_directory_uri(). '/assets/images/svg/SMALL_ICON_FILTER.svg'; ?>" class="filter_by_icon">
+      </div>-->
       <div class="categories-list text-center mb-2">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <?php if( $posts_for == 'case_studies' ) : ?>
@@ -58,7 +66,7 @@
             <input type="radio" name="post_type" value="testimonials" class="opt_post_type"> Testimonials
             <!-- <a href="/work/testimonials/">Testimonials</a> -->
           </label>
-        <?php else : ?>
+        <?php /*else : ?>
           <label class="btn opt_toggle btn-secondary active">
             <input type="radio" name="categoryid" value="" class="opt_category" checked> All
           </label>
@@ -68,11 +76,12 @@
           <label class="btn opt_toggle btn-secondary">
             <input type="radio" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
           </label>
-        <?php endforeach; ?>
+        <?php endforeach;*/ ?>
       <?php endif; ?>
         </div>
       </div>
     </div>
+    <?php endif; ?>
 
     <div class="container">
 
@@ -88,9 +97,11 @@
         <div class=" d-inline-block box-wrapper position-relative<?php echo ( $ctr == 1 ? ' first' : ( $ctr == 2 ? ' middle' : ( $ctr == 3 ? ' last' : '' ) ) ); ?>">
           <div class="box box-shadow text-center">
             <?php if($featured_img_url) : ?>
-              <img src="<?php echo $featured_img_url; ?>">
+              <!-- <img src="<?php echo $featured_img_url; ?>"> -->
+              <div class="img_box" style="background-image: url('<?php echo $featured_img_url; ?>');"></div>
             <?php else: ?>
-              <img src="<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC_Logo_Marker.svg'; ?>" class="img-dummy">
+              <!-- <img src="<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC_Logo_Marker.svg'; ?>" class="img-dummy"> -->
+              <div class="img_box" style="background-image: url('<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC_Logo_Marker.svg'; ?>');"></div>
             <?php endif; ?>
             <?php
               $headline = get_the_title();
@@ -98,7 +109,7 @@
               $headline = substr($headline, 0, 60);
               // $headline = substr($headline, 0, strrpos($headline, ' '));
             ?>
-              <div class="the_title text-white"><?php echo $headline; ?></div>
+              <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?>"><?php echo $headline; ?></div>
 
               <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '. get_the_author(); ?></div>
 
@@ -149,5 +160,8 @@
         <a href="javascript:;" id="<?php echo ( $posts_for == 'case_studies' ? 'more_custom_posts' : 'more_posts' ); ?>" class="btn btn_cta">Load more</a>
       </div>
     </div>
+
   </div>
 </section>
+
+<?php } ?>

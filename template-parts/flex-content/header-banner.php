@@ -20,7 +20,7 @@
   	<div class="page-banner-content-wrapper position-absolute w-100">
   		<div class="container">
       <?php //if( is_front_page() ) : ?>
-    		<div class="entry-content">
+    		<div class="entry-content <?php echo ( !is_front_page() ? 'd-flex align-items-center' : '' ); ?>">
     		<?php
           $post = get_post();
           $content = apply_filters('the_content', $post->post_content);

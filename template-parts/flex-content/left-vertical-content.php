@@ -23,7 +23,7 @@
       <div class="details"><?php echo wp_kses_post( wpautop( $details ) ); ?></div>
     </div>
     <?php endif; ?>
-    
+
     <div class="left-wrapper d-flex align-items-center position-relative">
       <div class="box-col img-wrap ml-auto">
         <div class="position-relative">

@@ -17,7 +17,7 @@
 
   	<div class="page-banner-content-wrapper position-absolute w-100">
   		<div class="container">
-    		<div class="entry-content">
+    		<div class="entry-content d-flex align-items-center">
     		<?php
           $post = get_post($post_id);
           $content = apply_filters('the_content', $post->post_content);

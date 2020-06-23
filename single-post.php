@@ -114,7 +114,13 @@ add_action( 'genesis_before_entry_content', 'wdc_output_featured_image', 5 );
 function wdc_output_featured_image() {
 	?>
 	<div class="entry-image">
-		<?php echo the_post_thumbnail( 'single-posts' ); ?>
+	<?php
+		if( has_post_thumbnail() ) :
+			the_post_thumbnail( 'full' );
+		else :
+			echo '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg)"></div>';
+		endif;
+	?>
 	</div>
 	<?php
 }

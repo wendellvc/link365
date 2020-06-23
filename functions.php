@@ -31,3 +31,4 @@ include_once __DIR__ . '/includes/theme-page-builder.php';
 // Include php files from includes folder
 include_once __DIR__ . '/template-parts/cpt/case-studies.php';
 include_once __DIR__ . '/template-parts/cpt/testimonials.php';
+include_once __DIR__ . '/template-parts/cpt/careers.php';

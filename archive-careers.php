@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog Template.
+ * Careers Template.
  *
  * @package   WDC\Theme
  * @author    Wendell cabalhin <wendell.cabalhin@intimation.co.uk>
@@ -8,7 +8,7 @@
  * @license   MIT
  */
 
-add_action( 'wp_head', 'wdc_blog_home_setup' );
+add_action( 'wp_head', 'wdc_careers_setup' );
 /**
  * Build our archive template.
  *
@@ -16,7 +16,7 @@ add_action( 'wp_head', 'wdc_blog_home_setup' );
  *
  * @return void
  */
-function wdc_blog_home_setup() {
+function wdc_careers_setup() {
 
 	// Force full width content layout.
 	add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
@@ -60,11 +60,11 @@ function wdc_output_post_meta() {
 ** start of the home/frontpage contents
 */
 function wdc_output_flex_body_class( $classes ) {
-	return array_merge( [ 'uses-flex-content', 'blog' ], $classes );
+	return array_merge( [ 'uses-flex-content', 'careers' ], $classes );
 }
 
 function wdc_output_flex_content() {
-	$post_id = 20; /* Blog page ID */
+	$post_id = 18; /* Careers page ID */
 
 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
 

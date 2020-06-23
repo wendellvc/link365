@@ -8,13 +8,15 @@
  * @license   MIT
  */
 
+	$post_type = get_post_type( get_the_ID() );
+
 ?>
 <section id="single-post-section" class="blog-single-post spacer pb-0">
 
 	<div class="breadcrumbs">
-		<div class="container">
+		<div class="container d-flex justify-content-center">
 				<div class="call_to_action back-to-overview">
-					<a href="/blog" class="btn btn_cta bgfull">BACK TO OVERVIEW</a>
+					<a href="<?php echo ( $post_type == 'case-studies' ? '/work' : ( $post_type == 'careers' ? '/careers' : '/blog' ) ); ?>" class="btn btn_cta">BACK TO OVERVIEW</a>
 				</div>
 		</div>
 	</div>
