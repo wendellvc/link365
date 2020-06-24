@@ -29,7 +29,6 @@
     <?php endif; ?>
 
     <!-- Dynamic Boxes -->
-    <!-- <div class="dynamic-boxes d-flex justify-content-center"> -->
     <div class="people-container dynamic-boxes">
       <div class="swiper-wrapper">
 
@@ -48,14 +47,11 @@
           $profile_link = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_cta_link', true );
 
           $img = wp_get_attachment_image_url( $image, 'full' );
-          // if ( $ctr == 1 ) :
-          //   echo '<div class="row">';
-          // endif;
+
           /* user the default boxes display */ ?>
           <div class="swiper-slide default-boxes <?php echo ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ); ?>">
             <div class="box box-shadow text-center <?php echo $cl_attr; ?>">
-              <?php $img = ( $img ? $img : get_stylesheet_directory_uri() .'/assets/images/svg/WDC_AVATAR.svg' ); ?>
-              <!-- <img src="<?php echo $img; ?>" class="img-responsive"> -->
+              <?php $img = ( $img ? $img : get_stylesheet_directory_uri() .'/assets/images/svg/WDC_DEFAULT_TEAM.svg' ); ?>
               <div class="img_box" style="background-image: url('<?php echo $img; ?>');"></div>
               <div class="main-title"><?php echo $title; ?></div>
               <div class="subtitle"><?php echo $subtitle; ?></div>
@@ -71,9 +67,7 @@
           </div>
 
         <?php
-        // if ( $ctr == 3 ) :
-        //   echo '</div>';
-        // endif;
+
         $ctr++;
         $ctr = ( $ctr > 3 ? 1 : $ctr );
         endfor; ?>

@@ -226,7 +226,7 @@ main.content { position: relative; top: -146px; }
   .default-boxes { display: inline-flex; margin: 0 30px; }
   .default-boxes.first,
   .default-boxes.last { margin: 0; }
-  .box { padding: 50px;
+  .box { padding: 20px;
     // .img-responsive { max-width: 120px; width: 100%; }
     .img_box { height: 158px; background-size: cover; background-position: center; background-repeat: no-repeat; }
     .main-title, .subtext { color: $color-default-white; }
@@ -321,7 +321,7 @@ main.content { position: relative; top: -146px; }
   padding: 45px 35px 0;
   background: #fff;
   max-width: 300px;
-  border-radius: 20px;
+  border-radius: 15px;
   transition: all .22s ease-in-out;
   min-height: 340px;
 }
@@ -446,7 +446,7 @@ main.content { position: relative; top: -146px; }
   }
   .the_title, .date-author { text-transform: uppercase; }
   .the_title { font-size: 18px; font-weight: 700; line-height: 1.2; min-height: 42px; }
-  .date-author { font-weight: 700; font-size: 13px; color: #ff9e18; margin: 20px 0 10px; }
+  .date-author, .date-author > a { font-weight: 700; font-size: 13px; color: #ff9e18; margin: 20px 0 10px; }
   .content-excerpt { font-weight: 500; font-size: 14px; color: #fff; line-height: 1.4; min-height: 100px; }
   .container > .call_to_action { margin: 80px 0 40px; }
   .intro { margin-bottom: 50px; }
@@ -474,6 +474,10 @@ main.content { position: relative; top: -146px; }
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.user-photo-wrapper { bottom: -50px;
+  .user-photo { width: 100px; height: 100px; background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #ff9e18; border-radius: 50%; }
 }
 
 /* Vertical Slides */

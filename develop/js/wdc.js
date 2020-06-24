@@ -546,9 +546,9 @@
 
   $('.opt_toggle').on('click', function(e) {
     /* setting an active/selected */
-    e.preventDefault();
-    $('.opt_toggle').removeClass('active');
-    $(this).addClass('active');
+    // e.preventDefault();
+    // $('.opt_toggle').removeClass('active');
+    // $(this).addClass('active');
     var catid = $(this).find('input').val();
     var category = $.trim($(this).text());
     $('#catid').attr("data-catid", catid);

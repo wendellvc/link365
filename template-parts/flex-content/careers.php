@@ -4,7 +4,7 @@
  *
  */
 
- $posts_per_page = get_field('posts_per_page', $id);
+ $posts_per_page = get_field('posts_per_page', $post_id);
 
   global $post;
   global $paged;  // current paginated page
@@ -59,7 +59,7 @@
 
     </div><!-- container -->
 
-    <?php if( $posts_count > 3 ) : ?>
+    <?php if( $posts_count > $posts_per_page ) : ?>
     <!-- LOAD MORE POSTS -->
     <div class="container">
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">

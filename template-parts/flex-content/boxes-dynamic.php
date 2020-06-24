@@ -29,7 +29,6 @@
     <?php endif; ?>
 
     <!-- Dynamic Boxes -->
-    <!-- <div class="dynamic-boxes d-flex justify-content-center"> -->
     <div class="dynamic-boxes">
 
     <?php
@@ -50,13 +49,7 @@
       if ( $ctr == 1 ) :
         echo '<div class="row">';
       endif;
-
-      // if( $profile ) :
-      //   if( $profile == 'engineer' ) :
-      //     $engineer .= locate_template( 'template-parts/flex-content/box.php');
-      //   elseif ($profile == 'examiner') :
-      //     $examiner .= locate_template( 'template-parts/flex-content/box.php');
-      //   endif; ?>
+      ?>
 
     <?php // else :
       /* user the default boxes display */ ?>

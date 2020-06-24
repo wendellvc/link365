@@ -1,6 +1,6 @@
 <?php
 /**
- * Partial: Columns
+ * Partial: Intro Heading
  *
  * @var int $post_id Post ID
  * @var string $wdc_page_builder Name of current flex content row.

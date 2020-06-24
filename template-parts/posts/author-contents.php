@@ -13,8 +13,6 @@
   if( $slug == 'careers' ) {
     include locate_template( 'template-parts/flex-content/careers.php');
 
-  } elseif( $slug == 'author' ) {
-    include locate_template( 'template-parts/posts/author-contents.php');
   } else {
 
   /*
@@ -53,59 +51,6 @@
 <section id="<?php echo $posts_for; ?>" class="listings">
 	<div id="blog-section" class="spacer">
 
-  <?php if( $posts_for == '' ) : ?>
-    <div class="container">
-        <!-- APPLIES TO BLOG POSTS -->
-        <div class="filter-by-category text-center mb-1">
-          <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <img src="<?php echo get_stylesheet_directory_uri(). '/assets/images/svg/SMALL_ICON_FILTER.svg'; ?>" class="filter_by_icon">
-          </a>
-        </div>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <?php
-            foreach( $categories as $category ) :  ?>
-              <label class="btn opt_toggle btn-secondary">
-                <input type="checkbox" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
-              </label>
-            <?php endforeach; ?>
-          </div>
-        </div>
-    </div>
-  <?php endif; ?>
-
-    <?php if( $posts_for == 'case_studies' ) : ?>
-    <!-- FILTER BY CATEGORIES -->
-    <div class="container">
-
-      <div class="categories-list text-center mb-2">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <?php if( $posts_for == 'case_studies' ) : ?>
-          <label class="btn opt_posts_toggle btn-secondary active">
-            <input type="radio" name="post_type" value="case-studies" class="opt_post_type"> Case Studies
-            <!-- <a href="work">Case Studies</a> -->
-          </label>
-          <label class="btn opt_posts_toggle btn-secondary">
-            <input type="radio" name="post_type" value="testimonials" class="opt_post_type"> Testimonials
-            <!-- <a href="/work/testimonials/">Testimonials</a> -->
-          </label>
-        <?php /*else : ?>
-          <label class="btn opt_toggle btn-secondary active">
-            <input type="radio" name="categoryid" value="" class="opt_category" checked> All
-          </label>
-
-        <?php
-        foreach( $categories as $category ) :  ?>
-          <label class="btn opt_toggle btn-secondary">
-            <input type="radio" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
-          </label>
-        <?php endforeach;*/ ?>
-      <?php endif; ?>
-        </div>
-      </div>
-    </div>
-    <?php endif; ?>
-
     <div class="container">
 
       <div id="ajax_posts" class="position-relative">
@@ -133,7 +78,7 @@
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
 
-              <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author; ?>" title="View Author Listing"><?php the_author(); ?></a></div>
+              <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><?php echo the_author_posts_link(); ?></div>
 
 
               <?php
