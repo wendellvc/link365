@@ -143,7 +143,11 @@ function wdc_output_blog_content() {
 	?>
 	<div class="primary-content mt-1">
 		<div class="category"><?php echo $list; ?></div>
-		<div class="date-author"><?php echo get_the_date( 'd/mY' ) .' - by '. get_the_author(); ?></div>
+		<div class="date-author">
+		<?php
+			echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?>
+			<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author; ?>" title="View Author Listing"><?php the_author(); ?></a>
+		</div>
 		<div class="mt-1"><?php echo the_content(); ?></div>
 
 		<!-- SHARE BUTTON -->

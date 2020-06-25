@@ -67,7 +67,7 @@ function wdc_output_flex_body_class( $classes ) {
 function wdc_output_flex_content() {
 
 
-	$post_id = 735; /* Author page ID */
+	$post_id = 744; /* Author page ID */
 
 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
 

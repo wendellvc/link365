@@ -13,6 +13,7 @@
   $author = get_user_meta($authorid);
 
   $photo_url = get_field('photo', "user_{$authorid}");
+  $photo_url = ( !empty($photo_url) ? $photo_url : get_stylesheet_directory_uri() .'/assets/images/svg/AUTHOR_AVATAR.svg' );
 
   if( !empty($img) ) :
 ?>

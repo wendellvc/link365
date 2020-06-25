@@ -63,6 +63,23 @@ function wdc_output_flex_body_class( $classes ) {
 	return array_merge( [ 'uses-flex-content', 'careers' ], $classes );
 }
 
+add_filter('nav_menu_css_class', 'current_type_nav_class', 10, 2);
+function current_type_nav_class($css_class, $item)
+{
+	if( get_post_type() === 'careers' ) {
+		$current_value = 'current_page_parent';
+		$css_class = array_filter($css_class, function ($element) use ($current_value) {
+			return ($element != $current_value);
+		});
+
+		if( strtolower($item->title) == 'careers' ) :
+			array_push($css_class, 'current_page_parent');
+		endif;
+	}
+
+    return $css_class;
+}
+
 function wdc_output_flex_content() {
 	$post_id = 18; /* Careers page ID */
 

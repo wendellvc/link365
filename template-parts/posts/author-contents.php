@@ -6,32 +6,23 @@
   * @var int $post_id Post ID
   */
 
-  $id = get_the_ID();
-
-  $post = get_post($post_id);
-  $slug = $post->post_name;
-  if( $slug == 'careers' ) {
-    include locate_template( 'template-parts/flex-content/careers.php');
-
-  } else {
+  $id = $_GET['authorid'];
 
   /*
-  ** 14 is the Work Page
   ** 20 is the Blog Page
   ** if page ID is not equal to the Blog page ID, then set to the current page ID, else set to Blog Page ID
   */
-  $post_ID = ( $id == 14 ? $id : 20 );
-  $cat_ID = 1;
+  $post_ID =  20;
   $posts_for = str_replace(' ', '_', strtolower(get_field('posts_for', $post_ID)));
   $posts_per_page = get_field('posts_per_page', $post_ID);
-  $post_type = ( $posts_for == 'case_studies' ? 'case-studies' : '' );
+  // $post_type = ( $posts_for == 'case_studies' ? 'case-studies' : '' );
 
   global $post;
   global $paged;  // current paginated page
   $args = array(
     'posts_per_page' => $posts_per_page,
-    'post_type' => $post_type,
-    // 'category_name' => 'blog',
+    // 'post_type' => $post_type,
+    'author' => $id,
     // 'cat' => $cat_ID,
     // 'paged' => $paged
   );
@@ -50,6 +41,12 @@
 ?>
 <section id="<?php echo $posts_for; ?>" class="listings">
 	<div id="blog-section" class="spacer">
+
+    <div class="container d-flex justify-content-center mb-2">
+        <div class="call_to_action back-to-overview m-0">
+          <a href="/blog" class="btn btn_cta">BACK TO OVERVIEW</a>
+        </div>
+    </div>
 
     <div class="container">
 
@@ -78,8 +75,10 @@
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
 
-              <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><?php echo the_author_posts_link(); ?></div>
-
+              <div class="date-author">
+              <?php
+                echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><?php the_author(); ?>
+              </div>
 
               <?php
               if( !empty(get_the_excerpt($post->ID)) ) :
@@ -132,5 +131,3 @@
 
   </div>
 </section>
-
-<?php } ?>

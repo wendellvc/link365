@@ -133,8 +133,11 @@
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
 
-              <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author; ?>" title="View Author Listing"><?php the_author(); ?></a></div>
-
+              <div class="date-author">
+              <?php
+                echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?>
+                <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author; ?>" title="View Author Listing"><?php the_author(); ?></a>
+              </div>
 
               <?php
               if( !empty(get_the_excerpt($post->ID)) ) :
