@@ -1,6 +1,6 @@
 <?php
 /**
- * Partial: Author Header banner
+ * Partial: Author/Category Listing Header banner
  *
  * @var int $post_id Post ID
  * @var string $wdc_page_builder Name of current flex content row.
@@ -9,15 +9,15 @@
   $imgID = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_image', true );
   $img = wp_get_attachment_image_src($imgID, 'full');
 
-  $authorid = $_GET['authorid'];
+  $authorid = ( isset($_GET['authorid']) ? $_GET['authorid'] : '' );
   $author = get_user_meta($authorid);
 
   $photo_url = get_field('photo', "user_{$authorid}");
   $photo_url = ( !empty($photo_url) ? $photo_url : get_stylesheet_directory_uri() .'/assets/images/svg/AUTHOR_AVATAR.svg' );
 
-  if( !empty($img) ) :
+  // if( !empty($img) ) :
 ?>
-
+<?php if( !empty($authorid) ) : ?>
 <section class="banner">
   <div class="position-relative">
 
@@ -28,6 +28,7 @@
     		</div>
     	</div>
   	</div>
+
     <div class="user-photo-wrapper position-absolute w-100 d-flex justify-content-center">
       <div class="user-photo" style="background-image: url('<?php echo $photo_url; ?>');"></div>
     </div>
@@ -38,5 +39,6 @@
 
   </div>
 </section>
-
 <?php endif; ?>
+
+<?php // endif; ?>

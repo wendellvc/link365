@@ -141,7 +141,7 @@ ul.navbar-nav { color: $color-default-white;
 }
 
 main.content { position: relative; top: -146px; }
-.single-post, .single-case-studies, .single-testimonials, .single-careers {
+.single-post, .single-case-studies, .single-testimonials, .single-careers, .category {
   main.content { background: #fff; }
   main.content, .site-footer { top: 0; margin-top: 0; }
   .entry-title, .category { color: #005470; text-transform: uppercase; }
@@ -149,7 +149,7 @@ main.content { position: relative; top: -146px; }
   .entry-header, .entry-excerpt, .entry-content, .entry-image { text-align: center; }
   .entry-excerpt, .entry-content, .entry-image { color: #7b868c; }
   .entry-content {
-    .category { font-size: 18px; font-weight: 700; }
+    .category { font-size: 18px; font-weight: 700; margin-top: 20px; }
     .date-author { font-size: 16px; font-weight: 700; color: #ff9e18; margin: 10px 0 40px; }
   }
   .primary-content, .entry-excerpt {
@@ -177,8 +177,10 @@ main.content { position: relative; top: -146px; }
     img { max-width: 569px; margin: 0 auto; }
   }
 }
+.blog #blog-section .category { color: #fff; font-size: 16px; font-weight: 700; margin-top: 20px; text-transform: uppercase;
+  a:hover { color: #4ac1e0; }
+}
 .front-page {
-
   .header-banner-img { height: 970px; }
 }
 .header-banner-img { height: 386px; background-repeat: no-repeat; background-position: center; background-size: cover; }

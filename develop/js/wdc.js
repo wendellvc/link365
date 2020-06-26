@@ -498,10 +498,10 @@
   var cat = $('#catid').data('catid');
   var pageNumber = 1;
 
-  function load_posts(filter_by) {
-
-      cat = ( filter_by != '' ? ( filter_by == 'All' ? '' : filter_by ) : cat );
-      pageNumber = ( filter_by != '' ? 0 : pageNumber++ );
+  function load_posts(filter_by, values, load_more) {
+      var categories = values.join('_');
+      cat = ( filter_by == 'All' ? '' : categories );
+      pageNumber = ( load_more == true ? pageNumber++ : 0 );
 
       pageNumber++;
 
@@ -538,10 +538,22 @@
   /*
   ** Generally for blog posts
   */
+  var $values;
+  var catid = 'All';
   $("#more_posts").on("click", function(e) { // When btn is pressed.
       e.preventDefault();
       $("#more_posts").attr("disabled", 'disabled'); // Disable the button, temp.
-      load_posts('');
+      $values = [];
+      var $boxes = $('.opt_toggle').find('input:checked');
+
+      if( $boxes.length > 0 ) {
+        catid = '';
+        $boxes.each(function() {
+          $values.push($(this).val());
+        });
+      }
+
+      load_posts(catid, $values, true);
   });
 
   $('.opt_toggle').on('click', function(e) {
@@ -549,11 +561,20 @@
     // e.preventDefault();
     // $('.opt_toggle').removeClass('active');
     // $(this).addClass('active');
-    var catid = $(this).find('input').val();
-    var category = $.trim($(this).text());
-    $('#catid').attr("data-catid", catid);
-    catid = ( category == 'All' ? category : catid );
-    load_posts(catid);
+    $values = [];
+    var $boxes = $('.opt_toggle').find('input:checked');
+    if( $boxes.length > 0 ) {
+      catid = '';
+      $boxes.each(function() {
+        $values.push($(this).val());
+      });
+    }
+
+    // var catid = $(this).find('input').val();
+    // var category = $.trim($(this).text());
+    // $('#catid').attr("data-catid", catid);
+    // catid = ( category == 'All' ? category : catid );
+    load_posts(catid, $values, false);
     $("#msg_notice").html('');
   });
 

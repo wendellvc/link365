@@ -58,7 +58,7 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 		$out = '';
 		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
 		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
-		$cat = (isset($_POST['cat'])) ? $_POST['cat'] : '';
+		$categories = ( isset($_POST['cat']) ? explode('_', $_POST['cat']) : '' );
 		$post_type = (isset($_POST['post_type'])) ? $_POST['post_type'] : '';
 		$ctr = 1;
 
@@ -67,7 +67,7 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 		if( !empty($post_type) ) :
 			$args = array( 'posts_per_page' => $ppp, 'post_type' => $post_type, 'paged' => $page );
 		else :
-			$args = array( 'posts_per_page' => $ppp, 'cat' => $cat, 'paged' => $page );
+			$args = array( 'posts_per_page' => $ppp, 'cat' => $categories, 'paged' => $page );
 		endif;
 
 		$posts = get_posts( $args );

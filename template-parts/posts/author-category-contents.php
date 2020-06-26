@@ -6,7 +6,8 @@
   * @var int $post_id Post ID
   */
 
-  $id = $_GET['authorid'];
+  $id = ( isset($_GET['authorid']) ? $_GET['authorid'] : '' );
+  $categoryid = ( isset($_GET['categoryid']) ? $_GET['categoryid'] : '' );
 
   /*
   ** 20 is the Blog Page
@@ -23,7 +24,7 @@
     'posts_per_page' => $posts_per_page,
     // 'post_type' => $post_type,
     'author' => $id,
-    // 'cat' => $cat_ID,
+    'cat' => $categoryid,
     // 'paged' => $paged
   );
 

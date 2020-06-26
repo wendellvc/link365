@@ -1,6 +1,6 @@
 <?php
 /**
- * Author Template.
+ * Category Template.
  *
  * @package   WDC\Theme
  * @author    Wendell cabalhin <wendell.cabalhin@intimation.co.uk>
@@ -8,7 +8,7 @@
  * @license   MIT
  */
 
-add_action( 'wp_head', 'wdc_author_setup' );
+add_action( 'wp_head', 'wdc_category_setup' );
 /**
  * Build our archive template.
  *
@@ -16,7 +16,7 @@ add_action( 'wp_head', 'wdc_author_setup' );
  *
  * @return void
  */
-function wdc_author_setup() {
+function wdc_category_setup() {
 
 	// Force full width content layout.
 	add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
@@ -38,7 +38,7 @@ function wdc_author_setup() {
 	remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 	add_filter( 'genesis_attr_entry-content', 'genesis_attributes_screen_reader_class' );
 	remove_action( 'genesis_loop', 'genesis_do_loop' );
-	remove_action( 'genesis_before_loop', 'genesis_do_author_title_description', 15 );
+	remove_action( 'genesis_before_loop', 'genesis_do_taxonomy_title_description', 15 );
 
 	// Output custom page header.
 	add_action( 'genesis_before_loop', 'wdc_output_flex_content' );
@@ -61,7 +61,7 @@ function wdc_output_post_meta() {
 ** start of the home/frontpage contents
 */
 function wdc_output_flex_body_class( $classes ) {
-	return array_merge( [ 'uses-flex-content', 'author' ], $classes );
+	return array_merge( [ 'uses-flex-content', 'category' ], $classes );
 }
 
 function wdc_output_flex_content() {
@@ -77,9 +77,9 @@ function wdc_output_flex_content() {
 			case 'header_banner':
 				include locate_template( 'template-parts/posts/author-category-banner.php');
 				break;
-			// case 'blog_heading':
-			// 	include locate_template( 'template-parts/posts/author-category-heading.php');
-			// 	break;
+			case 'blog_heading':
+				include locate_template( 'template-parts/posts/author-category-heading.php');
+				break;
 			case 'blog_contents':
 				include locate_template( 'template-parts/posts/author-category-contents.php');
 				break;

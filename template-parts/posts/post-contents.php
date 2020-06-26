@@ -47,14 +47,14 @@
   /* get posts from Blog category */
   $posts = get_posts( $args );
   $posts_count = count($posts);
-
+  $cat_count = count($categories);
   $ctr = 1;
 ?>
 <section id="<?php echo $posts_for; ?>" class="listings">
 	<div id="blog-section" class="spacer">
 
   <?php if( $posts_for == '' ) : ?>
-    <div class="container">
+    <div class="container mb-2">
         <!-- APPLIES TO BLOG POSTS -->
         <div class="filter-by-category text-center mb-1">
           <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -62,13 +62,15 @@
           </a>
         </div>
         <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <?php
-            foreach( $categories as $category ) :  ?>
-              <label class="btn opt_toggle btn-secondary">
-                <input type="checkbox" name="categoryid" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
-              </label>
-            <?php endforeach; ?>
+          <div class="d-flex justify-content-center">
+            <div class="card card-body">
+              <?php
+              foreach( $categories as $category ) :  ?>
+                <label class="btn opt_toggle btn-secondary">
+                  <input type="checkbox" name="categoryid[]" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
+                </label>
+              <?php endforeach; ?>
+            </div>
           </div>
         </div>
     </div>
@@ -114,6 +116,14 @@
           // echo '<pre>'; print_r($post); echo '</pre>';
           $featured_img_url = get_the_post_thumbnail_url($post->ID, 'full');
 
+          $categories = get_the_category();
+        	$list = array();
+        	foreach($categories as $cat) {
+            // echo '<pre>'; print_r($cat);
+        		$list[] = '<a href="'. get_category_link($cat->cat_ID) .'?categoryid='. $cat->cat_ID .'">'. $cat->name .'</a>';
+        	}
+        	$list = implode(', ', $list);
+
             if ( $ctr == 1 ) :
               echo '<div class="row w-100 text-center">';
             endif;
@@ -132,7 +142,7 @@
               // $headline = substr($headline, 0, strrpos($headline, ' '));
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
-
+              <div class="category"><?php echo $list; ?></div>
               <div class="date-author">
               <?php
                 echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?>
@@ -170,6 +180,7 @@
 
       </div><!-- ajax_posts -->
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
+      <input type="hidden" id="categories_count" value="<?php echo $cat_count; ?>">
     </div><!-- container -->
 
     <?php if( $posts_count > $posts_per_page ) : ?>
