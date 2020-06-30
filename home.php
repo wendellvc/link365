@@ -68,11 +68,16 @@ function wdc_output_flex_content() {
 
 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
 
+	$post = get_post($post_id);
+	// print_r($post);
 	foreach ( $wdc_page_builder as $count => $layout ) {
-
+		if( $post->post_name == 'blog' ) :
 		switch ( $layout ) {
 			case 'header_banner':
 				include locate_template( 'template-parts/posts/banner.php');
+				break;
+			case 'intro_content':
+				include locate_template( 'template-parts/flex-content/intro-heading.php');
 				break;
 			case 'blog_heading':
 				include locate_template( 'template-parts/posts/intro-heading.php');
@@ -84,6 +89,7 @@ function wdc_output_flex_content() {
 				include locate_template( 'template-parts/flex-content/flashing-banner.php');
 				break;
 		}
+	endif;
 
 	}
 

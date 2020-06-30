@@ -30,7 +30,7 @@
           <?php endif; ?>
             <div class="the_title text-white"><?php echo get_the_title(); ?></div>
 
-            <div class="date-author"><?php echo get_the_date( 'd/mY', $post->ID ) .' - by '. get_the_author(); ?></div>
+            <div class="date-author"><?php echo get_the_date( 'd/m/Y', $post->ID ) .' - by '; ?><a href="'<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) .'?authorid='. $post->post_author; ?>" title="View Author Listing"><?php echo get_the_author(); ?></a></div>
             <?php
             if( !empty(get_the_excerpt($post->ID)) ) :
             echo '<div class="content-excerpt">';

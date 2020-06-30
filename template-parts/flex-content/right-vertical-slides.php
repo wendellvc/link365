@@ -26,11 +26,11 @@
         <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
         <div class="subtitle"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
         <div class="subtext"><?php echo wp_kses_post( wpautop( $subtext ) ); ?></div>
-        <?php if( !empty($cta_label) ): ?>
-          <div class="call_to_action">
-            <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
-          </div>
-        <?php endif; ?>
+      <?php if( !empty($cta_label) ): ?>
+        <div class="call_to_action">
+          <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
+        </div>
+      <?php endif; ?>
       </div>
       <div class="box-col img-wrap slides-container mr-auto">
         <div class="swiper-wrapper position-relative">

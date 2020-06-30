@@ -33,7 +33,7 @@ function wdc_blog_single_setup() {
 
 
 	/* remove post content, header and footer markups */
-	//* Remove the entry header markup (requires HTML5 theme support)
+	// Remove the entry header markup (requires HTML5 theme support)
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
@@ -49,6 +49,18 @@ function wdc_blog_single_setup() {
 
 	// Attach custom content.
 	add_action( 'genesis_before_loop', 'wdc_output_posts_wrapper_open' );
+
+	/* post title, featured image, date, author */
+	add_action( 'genesis_before_loop', 'wdc_output_posts_heading_metas' );
+
+	add_action( 'genesis_loop', 'wdc_output_flex_content' );
+
+	/* display the previous and nect post */
+	add_action( 'genesis_after_loop', 'wdc_output_share_buttons' );
+
+	add_action( 'genesis_after_loop', 'custom_prev_next_post_nav' );
+
+	add_action( 'genesis_after_loop', 'wdc_output_posts_wrapper_close' );
 
 }
 
@@ -70,109 +82,63 @@ function wdc_output_posts_wrapper_open() {
 	include locate_template( 'template-parts/posts/listings-wrapper-open.php' );
 }
 
-add_action( 'genesis_entry_header', 'wdc_article_wrapper_open', 5 );
 /**
- * Output article wrapper open.
+ * Output single-post meta-details.
  *
  * @since 1.0.0
  *
  * @return void
  */
-function wdc_article_wrapper_open() {
-	echo '<div class="container">
-					<div class="entry-header">';/* <!-- closing div is found before wdc_output_excerpt -->*/
+function wdc_output_posts_heading_metas() {
+	include locate_template( 'template-parts/posts/post-meta-heading.php' );
 }
 
-add_action( 'genesis_entry_header', 'genesis_do_post_title', 5 );
-add_action( 'genesis_entry_header', 'genesis_do_post_title', 5 );
+function wdc_output_flex_content() {
+	$post_id = get_the_ID(); /* post ID */
 
-add_action( 'genesis_before_entry_content', 'wdc_output_excerpt', 5);
-/**
- * Output the excerpt.
- *
- * @return void
- * @since 0.1.0
- */
-function wdc_output_excerpt() {
-	?>
-	<!-- opening div is found after .container - wdc_article_wrapper_open -->
-	</div><!-- closing .entry-header -->
+	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
 
-	<div class="entry-excerpt">
-		<p><?php echo get_the_excerpt(); ?></p>
-	</div>
-	<?php
+	$post = get_post($post_id);
+	// print_r($post);
+	if( $wdc_page_builder ) :
+		foreach ( $wdc_page_builder as $count => $layout ) {
+			if( $post->post_type == 'post' ) :
+			switch ( $layout ) {
+				case 'single_column':
+					include locate_template( 'template-parts/posts/single-column.php');
+					break;
+				case 'two_columns':
+					include locate_template( 'template-parts/posts/two-columns.php');
+					break;
+			}
+			endif;
+		}
+	endif;
+
 }
 
-add_action( 'genesis_before_entry_content', 'wdc_output_featured_image', 5 );
+
 /**
- * Output the featured image.
+ * Output single-post wrapper close.
+ *
+ * @since 1.0.0
  *
  * @return void
- * @since 0.1.0
  */
-function wdc_output_featured_image() {
-	?>
-	<div class="entry-image">
-	<?php
-		if( has_post_thumbnail() ) :
-			the_post_thumbnail( 'full' );
-		else :
-			echo '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg)"></div>';
-		endif;
-	?>
-	</div>
-	<?php
-}
+function wdc_output_share_buttons() {
 
-add_action( 'genesis_entry_content', 'wdc_output_blog_content' );
-/**
- * Output the featured image.
- *
- * @return void
- * @since 0.1.0
- */
-function wdc_output_blog_content() {
-
-	$categories = get_the_category();
-	$list = array();
-	foreach($categories as $cat) {
-		$list[] = $cat->name;
-	}
-	$list = implode(', ', $list);
-	?>
-	<div class="primary-content mt-1">
-		<div class="category"><?php echo $list; ?></div>
-		<div class="date-author"><?php echo get_the_date( 'd/mY', get_the_ID() ) .' - by '. get_the_author(); ?></div>
-		<div class="mt-1"><?php echo the_content(); ?></div>
-
-		<!-- SHARE BUTTON -->
-		<?php
-			if( is_active_sidebar('btn-share') ) {
+	/* SHARE BUTTON */
+	if( is_active_sidebar('btn-share') ) {
+		echo '<div class="container">';
+			echo '<div class="d-flex justify-content-center">';
 				echo '<div class="shareit-buttons mt-2 mb-2">';
 				dynamic_sidebar('btn-share');
 				echo '</div>';
-			}
-		?>
-
-	</div>
-	<?php
+			echo '</div>';
+		echo '</div>';
+	}
 }
 
-add_action( 'genesis_after_entry_content', 'wdc_article_wrapper_close', 15 );
-/**
- * Output article wrapper open.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function wdc_article_wrapper_close() {
-	echo '</div>';
-}
-
-
-add_action( 'genesis_after_loop', 'wdc_output_posts_wrapper_close' );
 /**
  * Output single-post wrapper close.
  *
@@ -184,7 +150,15 @@ function wdc_output_posts_wrapper_close() {
 	include locate_template( 'template-parts/posts/listings-wrapper-close.php' );
 }
 
-/* display the previous and nect post */
-add_action( 'genesis_entry_footer', 'genesis_prev_next_post_nav', 12 );
+function custom_prev_next_post_nav() {
+	// echo get_previous_posts_link();
+	// if( get_previous_posts_link() || get_next_post_link() ) :
+		echo '<div class="adjacent-entry-pagination pagination">';
+		previous_post_link( '<div class="pagination-previous alignleft"> %link</div>', '<span class="adjacent-post-link">&laquo; %title</span>' );
+		next_post_link( '<div class="pagination-next alignright"> %link</div>', '<span>%title &raquo;</span>' );
+		echo '</div><!-- .prev-next-navigation -->';
+	// endif;
+}
+
 
 genesis();

@@ -54,8 +54,11 @@ function wdc_output_flex_content() {
 	$post_id = get_the_ID();
 	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
 
-	foreach ( $wdc_page_builder as $count => $layout ) {
+	/* get the post metas */
+	$post = get_post($post_id);
 
+	foreach ( $wdc_page_builder as $count => $layout ) {
+		if( $post->post_type == 'page' ) :
 		switch ( $layout ) {
 			case 'header_banner':
 				include locate_template( 'template-parts/flex-content/header-banner.php');
@@ -118,6 +121,7 @@ function wdc_output_flex_content() {
 				include locate_template( 'template-parts/posts/post-contents.php');
 				break;
 		}
+		endif;
 
 	}
 }

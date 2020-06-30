@@ -28,11 +28,14 @@
     // 'paged' => $paged
   );
 
-  $categories = get_categories( array(
-    'orderby' => 'name',
-    'order'   => 'ASC'
-    )
-  );
+  $categories = get_the_category();
+  $list = array();
+
+	foreach($categories as $cat) {
+		$list[] = '<a href="'. get_category_link($cat->cat_ID) .'?categoryid='. $cat->cat_ID .'">'. $cat->name .'</a>';
+	}
+
+	$list = implode(', ', $list);
 
   /* get posts from Blog category */
   $posts = get_posts( $args );
@@ -75,10 +78,10 @@
               // $headline = substr($headline, 0, strrpos($headline, ' '));
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
-
+              <div class="category"><?php echo $list; ?></div>
               <div class="date-author">
               <?php
-                echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?><?php the_author(); ?>
+                echo get_the_date( 'd/m/Y', $post->ID ) .' - by '; ?><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) .'?authorid='. $post->post_author; ?>" title="View Author Listing"><?php echo get_the_author(); ?></a>
               </div>
 
               <?php

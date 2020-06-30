@@ -60,6 +60,12 @@
     padding-bottom: 0!important;
 }
 
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
 .align-items-center {
     align-items: center!important;
 }

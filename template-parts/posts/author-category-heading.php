@@ -27,7 +27,7 @@
   $posts = get_posts( $args );
   $no_of_articles = count($posts);
   $article_label = ( $no_of_articles > 1 ? ' ARCTICLES' : ' ARTICLE' );
-  $description = ( !empty($description) ? $description : $no_of_articles .$article_label );
+  $description = ( !empty($description) ? $description : $no_of_articles . $article_label );
 
   if( !empty($intro) || !empty($description) ) : ?>
 

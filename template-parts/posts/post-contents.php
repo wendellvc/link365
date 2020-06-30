@@ -60,17 +60,16 @@
           <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             <img src="<?php echo get_stylesheet_directory_uri(). '/assets/images/svg/SMALL_ICON_FILTER.svg'; ?>" class="filter_by_icon">
           </a>
+          <p class="mt-1">FILTER RESULTS</p>
         </div>
         <div class="collapse" id="collapseExample">
-          <div class="d-flex justify-content-center">
-            <div class="card card-body">
-              <?php
-              foreach( $categories as $category ) :  ?>
-                <label class="btn opt_toggle btn-secondary">
-                  <input type="checkbox" name="categoryid[]" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
-                </label>
-              <?php endforeach; ?>
-            </div>
+          <div class="card card-body d-flex justify-content-center">
+            <?php
+            foreach( $categories as $category ) :  ?>
+              <label class="btn opt_toggle btn-secondary">
+                <input type="checkbox" name="categoryid[]" class="opt_category" value="<?php echo $category->term_id; ?>"> <?php echo trim($category->name); ?>
+              </label>
+            <?php endforeach; ?>
           </div>
         </div>
     </div>
@@ -112,6 +111,7 @@
 
       <div id="ajax_posts" class="position-relative">
       <?php
+        $i = 0;
         foreach ( $posts as $post ) : setup_postdata( $post );
           // echo '<pre>'; print_r($post); echo '</pre>';
           $featured_img_url = get_the_post_thumbnail_url($post->ID, 'full');
@@ -145,7 +145,7 @@
               <div class="category"><?php echo $list; ?></div>
               <div class="date-author">
               <?php
-                echo get_the_date( 'd/mY', $post->ID ) .' - by '; ?>
+                echo get_the_date( 'd/m/Y', $post->ID ) .' - by '; ?>
                 <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author; ?>" title="View Author Listing"><?php the_author(); ?></a>
               </div>
 
@@ -173,6 +173,7 @@
             echo '</div>';
           endif;
 
+          $i++;
           $ctr++;
           $ctr = ( $ctr > 3 ? 1 : $ctr );
         endforeach;
