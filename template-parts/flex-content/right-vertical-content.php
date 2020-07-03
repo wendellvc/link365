@@ -12,6 +12,8 @@
  $title = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_title', true );
  $subtitle = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtitle', true );
  $subtext = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtext', true );
+ $cta_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_label', true );
+ $cta_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_url', true );
 ?>
 
 <section id="right_content" class="spacer position-relative">
@@ -21,7 +23,14 @@
       <div class="box-col text-wrap ml-auto">
         <div class="title"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
         <div class="subtitle"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
+        <?php if( $subtext ) :  ?>
         <div class="subtext"><?php echo wp_kses_post( wpautop( $subtext ) ); ?></div>
+        <?php endif; ?>
+        <?php if( !empty($cta_label) ): ?>
+          <div class="call_to_action">
+            <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="box-col img-wrap mr-auto">
         <div class="position-relative">

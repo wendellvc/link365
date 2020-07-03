@@ -12,6 +12,8 @@
   $subtitle = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtitle', true );
   $subtext = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_subtext', true );
   $cta_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_label', true );
+  $cta_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_url', true );
+  
   $slides = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_slides', true );
 ?>
 

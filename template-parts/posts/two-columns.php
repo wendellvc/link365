@@ -13,7 +13,7 @@
 ?>
 
 <div class="two-column-content">
-  <div class="container position-relative mt-1 mb-1">
+  <div class="container position-relative mt-1">
     <div class="row">
       <div class="col">
         <h4><?php echo $l_heading; ?></h4>

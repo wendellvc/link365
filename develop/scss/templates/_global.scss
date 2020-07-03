@@ -21,6 +21,9 @@ h2 { line-height: 1; }
 .header-socials-wrapper { display: none;
   .textwidget {
     display: flex; justify-content: center;
+    a#tel, a#email { width: auto; height: 26px; }
+    a#email { margin-left: 15
+      px; margin-right: 20px; }
     a { width: 26px; height: 26px; display: flex; align-items: center; justify-content: flex-end;
       &:nth-child(2) { margin: 0 5px 0 15px; }
     }
@@ -103,12 +106,18 @@ ul.navbar-nav { color: $color-default-white;
 
 /** flashing banner **/
 .bgcolor { color: #004a62; font-weight: 700; }
-#flashing-banner-shadow { background: url('../images/flashing-banner-shadow.png') repeat-x top; min-height: 83px; padding: 50px 0; border: none; }
+#flashing-banner-shadow { background: url('../images/flashing-banner-shadow.png') repeat-x top; min-height: 83px; padding: 50px 0; border: none;
+  .bgcolor { transition: all .5s linear; margin-left: 0;
+    &:hover { color: #fff;
+      .tail { background: url('../images/svg/WDC_SMALL_ARROW_B.svg') no-repeat; width: 48px; }
+    }
+  }
+}
 #flashing-banner-no-shadow { min-height: 83px; padding: 50px 0; border: none;
   p, * { font-weight: 700; margin-bottom: 0; }
   .bgcolor { transition: all .5s linear;
     &:hover { color: #fff;
-      .tail { background: url('../images/svg/WDC_SMALL_ARROW_B.svg') no-repeat; width: 47px; }
+      .tail { background: url('../images/svg/WDC_SMALL_ARROW_B.svg') no-repeat; width: 48px; }
     }
   }
 }
@@ -199,8 +208,14 @@ main.content { position: relative; top: -146px; }
 
 #why, #values, #sectors, #left_content, #right_content, #facility_elements { background-color: $color-default-white; }
 
-#left_content {
+#left_content, #right_content {
+  .heading-wrapper {
+    .details p { line-height: 1.2; }
+  }
   .heading.intro { margin-bottom: unset; }
+  .img-wrap {
+    img { height: 321px; }
+  }
 }
 
 #case_studies, #single-post-section {
@@ -260,6 +275,7 @@ main.content { position: relative; top: -146px; }
 
 .col { margin-top: 30px; }
 .two-column-content { font-size: 16px; font-weight: 400;
+  .container { max-width: 768px; }
   h4 { color: #005470; text-transform: uppercase; }
   .row { display: flex; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; }
   .col { margin-top: 0; padding-left: 15px; padding-right: 15px; }
@@ -295,6 +311,9 @@ main.content { position: relative; top: -146px; }
 }
 
 #column_grids, .intro-heading, #our_people { background-color: #ebedee; }
+#consumables, #welding_plants { /*background-color: #fff;*/
+  h4 { color: #ff9e18; }
+}
 #our_products, #accreditations, #gallery-items { background-color: #005470;
   h2 { color: #ff9e18; }
   p { color: #fff; margin: 0; }
@@ -509,7 +528,7 @@ main.content { position: relative; top: -146px; }
 .divider { background-color: #005470; height: 43px; max-width: 1070px; width: 100%; }
 #divider_thin { background-color: #fff; /*padding-bottom: 70px;*/ }
 .divider-thin { background-color: #7b868c; height: 2px; max-width: 970px; width: 100%; opacity: .15; }
-#left_vertical_slides, #right_vertical_slides, #right_content { background-color: #fff; /*padding-bottom: 70px;*/
+#left_vertical_slides, #right_vertical_slides, #left_content, #right_content { background-color: #fff; /*padding-bottom: 70px;*/
   .title > p { font-size: 34px; /*margin-top: 28px;*/ margin-bottom: 0; }
   .subtitle > p { color: #004a62; }
   .subtext > p { margin-bottom: 0; }

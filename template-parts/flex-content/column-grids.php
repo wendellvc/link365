@@ -16,7 +16,7 @@
   $ctr = 1;
 ?>
 
-<section <?php echo ( $id_attr ? 'id="'.$id_attr.'"' : 'id="column_grids"' ) . ( $cl_attr ? 'class="'.$cl_attr.' spacer position-relative' : 'class="spacer position-relative"' ); ?>>
+<section <?php echo ( $id_attr ? 'id="'.$id_attr.'"' : 'id="column_grids"' ) . ( $cl_attr ? 'class="'.$cl_attr.' spacer position-relative"' : 'class="spacer position-relative"' ); ?>>
   <div class="container">
 
     <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
@@ -30,11 +30,11 @@
       $subtitle = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_subtext', true );
 
       // if( $id_attr ) :
-        if ( $boxes >= 3 ) :
+        // if ( $boxes >= 3 ) :
           if ( $ctr == 1 ) :
             echo '<div class="row w-100 text-center">';
           endif;
-        endif;
+        // endif;
       // endif; ?>
       <div class="img-wrapper text-center <?php echo ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ); ?>">
         <img src="<?php echo wp_get_attachment_image_url( $icon, 'full' ); ?>">
@@ -43,11 +43,11 @@
       </div>
     <?php
       // if( $id_attr ) :
-        if ( $boxes >= 3 ) :
+        // if ( $boxes >= 3 ) :
           if ( $ctr == 3 ) :
             echo '</div>';
           endif;
-        endif;
+        // endif;
       // endif;
       $ctr++;
       $ctr = ( $ctr > 3 ? 1 : $ctr );
