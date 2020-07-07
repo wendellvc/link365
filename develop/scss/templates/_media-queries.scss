@@ -15,7 +15,11 @@
     li:last-child { margin-left: 15px; }
   }
 
-
+  .page-banner-content-wrapper {
+    .entry-content {
+      h2 { font-size: 68px; }
+    }
+  }
 
   #boxes_with_ctas, #blog-section {
     .d-flex, .container > .d-flex.services { display: flex!important;
@@ -135,6 +139,18 @@
     }
   }
 
+  .page-banner-content-wrapper {
+    .entry-content {
+      h2 { font-size: 60px; }
+    }
+  }
+
+  .subtitle, .text { margin-bottom: 30px; }
+  .left-wrapper .img-wrap { margin-bottom: 0; }
+  .left-wrapper, .right-wrapper {
+    .call_to_action { margin-top: 0; }
+  }
+
 }
 
 /* min-width 576px */
@@ -143,9 +159,11 @@
   .navbar-toggler { margin: -83px 0 0 0; }
   .page-banner-content-wrapper {
     .entry-content {
-      h2 { font-size: 68px; line-height: .9; }
+      h2 { font-size: 50px; line-height: .9; margin-bottom: 0; }
     }
   }
+
+  .alert-dismissible .close { right: 0; top: 0; }
 
   #column_grids {
     .d-flex { display: flex!important; }
@@ -163,6 +181,8 @@
       h2 { font-size: 37px; line-height: 1; }
     }
   }
+
+  .alert-dismissible .close { right: 15px; top: -40px; }
 
   .tabs { margin-bottom: 50px; display: none!important; }
 
@@ -193,8 +213,7 @@
   //   margin-right: 20px;
   // }
 
-  .slides-container {
-    max-height: 255px; margin-bottom: 30px;
+  .slides-container { max-height: 321px; margin-bottom: 30px; overflow: hidden;
     .swiper-pagination-bullet { background: #d2d2d2; opacity: .5; }
     .swiper-pagination-bullet.swiper-pagination-bullet-active { background: #ff9e18; opacity: 1; }
   }
@@ -213,7 +232,7 @@
   }
 
   #benefits {
-    .swiper-button-next, .swiper-button-prev { bottom: 10%!important; top: 83%; }
+    .swiper-button-next, .swiper-button-prev { bottom: 0%!important; top: unset; }
   }
 
   #values, #facility_elements {
@@ -227,5 +246,12 @@
     .right-wrapper {
       .box-col.text-wrap { max-width: 100%; }
     }
+  }
+
+  .subtitle, .text,
+  .subtitle p, .text p  { margin-bottom: 0; }
+  .left-wrapper .img-wrap { margin-bottom: 30px; }
+  .left-wrapper, .right-wrapper {
+    .call_to_action { margin-top: 15px; }
   }
 }

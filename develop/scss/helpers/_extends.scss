@@ -36,8 +36,8 @@
 .ml-1 { margin-left: 1rem; }
 .mt-1 { margin-top: 1rem; }
 .mb-1 { margin-bottom: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mb-2 { margin-bottom: 2rem; }
+.mt-2 { margin-top: 2rem!important; }
+.mb-2 { margin-bottom: 2rem!important; }
 .mr-auto, .mx-auto {
     margin-right: auto!important;
 }
@@ -56,8 +56,14 @@
 .p-0 {
     padding: 0!important;
 }
+.pt-0 {
+    padding-top: 0!important;
+}
 .pb-0 {
     padding-bottom: 0!important;
+}
+.pb-3 {
+    padding-bottom: 3rem!important;
 }
 
 .col {
@@ -99,6 +105,23 @@
   -webkit-transition-timing-function: ease;
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.default.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    border-radius: .25rem;
 }
 
 .alert-dismissable,

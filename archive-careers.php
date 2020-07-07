@@ -66,18 +66,17 @@ function wdc_output_flex_body_class( $classes ) {
 add_filter('nav_menu_css_class', 'current_type_nav_class', 10, 2);
 function current_type_nav_class($css_class, $item)
 {
-	if( get_post_type() === 'careers' ) {
+
+	if( strtolower($item->title) == 'careers' ) :
+		array_push($css_class, 'current_page_parent');
+	else :
 		$current_value = 'current_page_parent';
 		$css_class = array_filter($css_class, function ($element) use ($current_value) {
 			return ($element != $current_value);
 		});
+	endif;
 
-		if( strtolower($item->title) == 'careers' ) :
-			array_push($css_class, 'current_page_parent');
-		endif;
-	}
-
-    return $css_class;
+	return $css_class;
 }
 
 function wdc_output_flex_content() {

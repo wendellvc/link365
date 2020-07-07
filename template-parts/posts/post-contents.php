@@ -13,8 +13,9 @@
   if( $slug == 'careers' ) {
     include locate_template( 'template-parts/flex-content/careers.php');
 
-  } elseif( $slug == 'author' ) {
-    include locate_template( 'template-parts/posts/author-contents.php');
+  // } elseif( $slug == 'author' ) {
+  } elseif( $slug == 'home' ) {
+    include locate_template( 'template-parts/posts/home-blog-contents.php');
   } else {
 
   /*
@@ -46,7 +47,8 @@
 
   /* get posts from Blog category */
   $posts = get_posts( $args );
-  $posts_count = count($posts);
+  $all_posts = get_posts( array('post_type' => $post_type) );
+  $posts_count = count($all_posts);
   $cat_count = count($categories);
   $ctr = 1;
 ?>
@@ -108,7 +110,7 @@
     <?php endif; ?>
 
     <div class="container">
-
+    <?php if( $posts ) : ?>
       <div id="ajax_posts" class="position-relative">
       <?php
         $i = 0;
@@ -137,8 +139,8 @@
             <?php endif; ?>
             <?php
               $headline = get_the_title();
-
-              $headline = substr($headline, 0, 60);
+              if( strlen($headline) > 40 )
+								$headline = substr($headline, 0, 40).'...';
               // $headline = substr($headline, 0, strrpos($headline, ' '));
             ?>
               <div class="<?php echo ( $posts_for == 'case_studies' ? 'title' : 'the_title text-white' ) ?> d-flex align-items-center"><?php echo $headline; ?></div>
@@ -153,8 +155,8 @@
               if( !empty(get_the_excerpt($post->ID)) ) :
               echo '<div class="content-excerpt">';
                 $excerpt = get_the_excerpt($post->ID);
-
-                $excerpt = substr($excerpt, 0, 150);
+                if( strlen($excerpt) > 150 )
+                  $excerpt = substr($excerpt, 0, 150).'...';
                 // $result = substr($excerpt, 0, strrpos($excerpt, ' '));
                 echo $excerpt;
               echo '</div>';
@@ -177,9 +179,13 @@
           $ctr++;
           $ctr = ( $ctr > 3 ? 1 : $ctr );
         endforeach;
-        wp_reset_postdata(); ?>
+        wp_reset_postdata();  ?>
 
       </div><!-- ajax_posts -->
+    <?php else: ?>
+      <div class="alert alert-primary text-center" role="alert"><strong>Notice</strong> There are no vacancies at present.</div>
+    <?php endif; ?>
+
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
       <input type="hidden" id="categories_count" value="<?php echo $cat_count; ?>">
     </div><!-- container -->
@@ -189,7 +195,7 @@
     <div class="container">
 
       <div id="msg_notice" class="text-center"></div>
-      <div class="call_to_action d-flex justify-content-center">
+      <div class="call_to_action d-flex justify-content-center mt-2 mb-0">
       <?php if( $posts_for == 'case_studies' ) : ?>
         <input type="hidden" id="post_type" value="<?php echo $post_type; ?>">
       <?php else : ?>

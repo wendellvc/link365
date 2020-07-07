@@ -22,7 +22,7 @@
 <section id="careers" class="listings">
   <div id="blog-section" class="spacer">
     <div class="container">
-
+    <?php if( $posts ) : ?>
       <div id="ajax_posts" class="position-relative">
       <?php
         foreach ( $posts as $post ) : setup_postdata( $post );
@@ -56,6 +56,10 @@
         wp_reset_postdata(); ?>
 
       </div><!-- ajax_posts -->
+
+    <?php else: ?>
+      <div class="alert alert-primary text-center" role="alert">There are no vacancies at present.</div>
+    <?php endif; ?>
 
     </div><!-- container -->
 

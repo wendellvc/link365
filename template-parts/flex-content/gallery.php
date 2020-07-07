@@ -13,7 +13,7 @@
 $gallery = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_images', true );
 
 ?>
-<section id="gallery" class="spacer">
+<section id="gallery" class="">
 
   <div class="container position-relative">
 
@@ -25,7 +25,7 @@ $gallery = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_images', tr
       ?>
 
         <div class="swiper-slide d-flex justify-content-center">
-          <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>">
+          <div class="gallery-image-wrap" style="background-image: url('<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>');"></div>
         </div>
 
       <?php

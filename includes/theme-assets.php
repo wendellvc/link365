@@ -120,7 +120,8 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 						endif;
 
 							$headline = get_the_title($ID);
-							$headline = substr($headline, 0, 60);
+							if( strlen($headline) > 40 )
+								$headline = substr($headline, 0, 40).'...';
 
 							$out .= '<div class="'. ( $post_type == 'case-studies' ? 'title' : 'the_title text-white' ) .'">'. $headline .'</div>';
 							$out .= '<div class="date-author">'. get_the_date( 'd/m/Y', $post->ID ) .' - by <a href="'. get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author .'" title="View Author Listing">'. the_author() .'</a></div>';
@@ -128,7 +129,8 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 							if( !empty(get_the_excerpt($ID)) ) :
 								$out .= '<div class="content-excerpt">';
 								$excerpt = get_the_excerpt($ID);
-								$excerpt = substr($excerpt, 0, 150);
+								if( strlen($excerpt) > 150 )
+                  $excerpt = substr($excerpt, 0, 150).'...';
 								$out .= $excerpt;
 								$out .= '</div>';
 							endif;

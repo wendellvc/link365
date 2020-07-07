@@ -53,7 +53,7 @@
     </div>
 
     <div class="container">
-
+    <?php if( $posts ) : ?>
       <div id="ajax_posts" class="position-relative">
       <?php
         foreach ( $posts as $post ) : setup_postdata( $post );
@@ -114,6 +114,10 @@
         wp_reset_postdata(); ?>
 
       </div><!-- ajax_posts -->
+    <?php else: ?>
+      <div class="alert alert-primary text-center" role="alert"><strong>Notice</strong> There are no posts.</div>
+    <?php endif; ?>
+
       <input type="hidden" id="posts_per_page" data-posts="<?php echo $posts_per_page; ?>">
     </div><!-- container -->
 

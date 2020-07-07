@@ -10,6 +10,7 @@
   $cl_attr = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_class_attribute', true );
   $intro = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_intro_text', true );
   $boxes = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes', true );
+  $file = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_downloadable_file', true );
   $cta_label = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_label', true );
   $cta_url = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_cta_url', true );
 
@@ -54,6 +55,11 @@
     } ?>
     </div>
 
+  <?php if( !empty($file) ): ?>
+    <div class="call_to_action justify-content-center position-absolute">
+      <a href="<?php echo $file; ?>" class="btn bgfull">Download Price List</a>
+    </div>
+  <?php endif; ?>
   <?php if( !empty($cta_label) ): ?>
     <div class="call_to_action justify-content-center position-absolute">
       <a href="<?php echo $cta_url; ?>" class="btn bgfull"><?php echo $cta_label; ?></a>

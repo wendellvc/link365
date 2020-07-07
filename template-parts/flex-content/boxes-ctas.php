@@ -19,13 +19,13 @@
 ?>
 
 <section id="boxes_with_ctas" class="position-relative <?php echo ( $boxes > 3 ? 'products_list' : 'spacer ' ); ?>">
-  <div class="container">
+  <div class="container <?php echo ( !empty($download_label) ? '' : 'mb-3' ); ?>">
 
     <?php if( $intro ) : ?>
       <div class="intro text-center"><?php echo wp_kses_post( wpautop( $intro ) ); ?></div>
     <?php endif; ?>
 
-    <div class="<?php echo ( $boxes > 3 ? 'text-center products' : 'd-flex justify-content-center services' ); ?> position-relative">
+    <div class="<?php echo ( $boxes > 3 ? 'text-center products' : 'box-services d-flex justify-content-center services' ); ?> position-relative">
 
     <?php for ( $i = 0; $i < $boxes; $i++ ) {
       $icon = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_boxes_' . $i . '_image', true );
@@ -38,8 +38,15 @@
       ?>
       <div class="box-wrapper position-relative <?php echo ( $boxes > 3 ? 'float-left' : '' ) . ( $ctr == 1 ? ' first' : ( $ctr == 2 ? ' middle' : ( $ctr == 3 ? ' last' : '' ) ) ); ?>">
         <div class="box box-shadow text-center">
-
+        <?php if( $boxes > 3 ) : ?>
+          <?php if($img) : ?>
+            <div class="img_box" style="background-image: url('<?php echo $img; ?>');"></div>
+          <?php else: ?>
+            <div class="img_box" style="background-image: url('<?php echo get_stylesheet_directory_uri().'/assets/images/svg/WDC_DEFAULT_CONTENT_ONWHITE_TRANSPARENT.svg'; ?>');"></div>
+          <?php endif; ?>
+        <?php else: ?>
           <img src="<?php echo $img; ?>">
+        <?php endif; ?>
 
           <?php if( $link ) : ?>
           <div class="title"><?php echo $title; ?></div>
@@ -48,8 +55,10 @@
           <?php endif; ?>
           <?php if( $text ) : ?>
           <div class="subtitle"><?php echo wp_kses_post( wpautop( $text ) ); ?></div>
-        <?php endif; ?>
+          <?php endif; ?>
+          <?php if( $subtitle ) : ?>
           <div class="subtext"><?php echo wp_kses_post( wpautop( $subtitle ) ); ?></div>
+          <?php endif; ?>
           <?php if( $link ) : ?>
           <div class="call_to_action justify-content-center">
             <a href="<?php echo $link; ?>" class="btn-half-circle position-relative">
@@ -59,8 +68,10 @@
         <?php
             endif; ?>
         </div>
-        <div class="box-hover bgorange position-absolute">
-          <?php echo wp_kses_post( wpautop( $when_hovered ) ); ?>
+        <div class="box-hover bgorange position-absolute d-flex align-items-center">
+          <div class="position-relative">
+            <?php echo wp_kses_post( wpautop( $when_hovered ) ); ?>
+          </div>
         </div>
       </div>
     <?php
@@ -68,6 +79,7 @@
       $ctr = ( $ctr > 3 ? 1 : $ctr );
     } ?>
 
+      <div class="clearfix">&nbsp;</div>
     </div>
 
   <?php if( !empty($cta_label) ): ?>
@@ -77,12 +89,11 @@
   <?php endif; ?>
 
   <?php if( !empty($download_label) ): ?>
-    <div class="spacer d-flex justify-content-center clear">
+    <div class="spacer d-flex justify-content-center clear mb-2">
     <div class="call_to_action">
       <a href="<?php echo $download_url; ?>" class="btn btn_cta"><?php echo $download_label; ?></a>
     </div>
     </div>
   <?php endif; ?>
-
   </div>
 </section>

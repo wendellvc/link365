@@ -40,7 +40,7 @@ $tabs = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_tabs', true );
       ?>
 
         <div class="swiper-slide d-flex justify-content-center">
-          <div class="tab-container">
+          <div class="tab-container d-flex align-items-center">
             <div class="tab-content">
               <div class="tab-title text-center"><?php echo wp_kses_post( wpautop( $title ) ); ?></div>
               <div class="text-center"><?php echo wp_kses_post( wpautop( $details ) ); ?></div>
