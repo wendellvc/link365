@@ -38,7 +38,8 @@
             $img = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_slides_' . $i . '_image', true );
             ?>
               <div class="swiper-slide img-wrap d-flex align-items-center">
-                <img src="<?php echo wp_get_attachment_image_url( $img, 'full' ); ?>">
+                <!-- <img src="<?php echo wp_get_attachment_image_url( $img, 'full' ); ?>"> -->
+                <div class="img_slider" style="background-image: url('<?php echo wp_get_attachment_image_url( $img, 'full' ); ?>');"></div>
               </div>
           <?php } ?>
         </div>

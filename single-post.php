@@ -154,8 +154,8 @@ function custom_prev_next_post_nav() {
 	// echo get_previous_posts_link();
 	// if( get_previous_posts_link() || get_next_post_link() ) :
 		echo '<div class="adjacent-entry-pagination pagination">';
-		previous_post_link( '<div class="pagination-previous alignleft"> %link</div>', '<span class="adjacent-post-link">&laquo; %title</span>' );
-		next_post_link( '<div class="pagination-next alignright"> %link</div>', '<span>%title &raquo;</span>' );
+		previous_post_link( '<div class="pagination-previous alignleft d-flex align-items-center justify-content-center"> %link</div>', '<span class="adjacent-post-link">&laquo; %title</span>' );
+		next_post_link( '<div class="pagination-next alignright d-flex align-items-center justify-content-center"> %link</div>', '<span>%title &raquo;</span>' );
 		echo '</div><!-- .prev-next-navigation -->';
 	// endif;
 }
