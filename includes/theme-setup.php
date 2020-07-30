@@ -96,3 +96,59 @@ function wdc_acf_init() {
 }
 
 add_action('acf/init', __NAMESPACE__ . '\\wdc_acf_init');
+
+// Include the Google Analytics Tracking Code (ga.js)
+// @ https://developers.google.com/analytics/devguides/collection/gajs/
+function google_analytics_tracking_code() {
+
+	$propertyID = 'UA-173142231-1'; // GA Property ID
+
+	//if ($options['ga_enable']) { ?>
+
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', '<?php echo $propertyID; ?>']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+
+<?php
+	// }
+}
+
+// include GA tracking code before the closing head tag
+add_action('wp_head',  __NAMESPACE__ . '\\google_analytics_tracking_code');
+
+// OR include GA tracking code before the closing body tag
+// add_action('wp_footer', __NAMESPACE__ . '\\google_analytics_tracking_code');
+
+
+/*
+** Theme Option Settings
+*/
+$parent = acf_add_options_page(array(
+	'page_title'    => 'Theme Settings',
+	'menu_title'    => 'Theme Option Settings',
+	'menu_slug'     => 'theme-settings',
+	'capability'    => 'administrator',
+	'redirect'      => false
+));
+
+acf_add_options_sub_page(array(
+	'page_title' 	=> 'APIs',
+	'menu_title' 	=> 'API Settings',
+	'parent_slug' 	=> $parent['menu_slug'],
+));
+
+function add_gf_cap()
+{
+    $role = get_role( 'editor' );
+    $role->add_cap( 'gform_full_access' );
+}
+
+add_action( 'admin_init', __NAMESPACE__ . '\\add_gf_cap' );

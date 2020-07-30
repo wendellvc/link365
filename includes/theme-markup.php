@@ -213,7 +213,7 @@ add_action( 'widgets_init',  __NAMESPACE__ . '\\register_custom_widgets', 5 );
  * @return void
  */
 function register_custom_widgets() {
-	register_sidebar( array(
+	/*register_sidebar( array(
 	   'name'          => __( 'Header Socials' ),
 	   'id'            => 'header-links-socials',
 	   'description'   => __( 'Widgets in this area will be shown on header area.' ),
@@ -221,7 +221,7 @@ function register_custom_widgets() {
 	   'after_widget'  => '',
 	   'before_title'  => '',
 	   'after_title'   => '',
-	) );
+	) );*/
 
 	register_sidebar( array(
 	   'name'          => __( 'Footer Credits' ),
@@ -252,6 +252,7 @@ function register_custom_widgets() {
 	   'before_title'  => '',
 	   'after_title'   => '',
 	) );
+
 
 	register_sidebar( array(
 	   'name'          => __( 'Share Button' ),

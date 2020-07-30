@@ -33,10 +33,17 @@
 ?>
       <div id="btn_toggler_menu_wrapper" class="d-flex flex-column align-items-end float-right w-100">
         <div class="header-socials-wrapper">
+          <div class="textwidget custom-html-widget">
+            <a id="tel" href="tel:<?php echo get_field('phone', 'option'); ?>"><?php echo get_field('phone', 'option'); ?></a>
+            <a id="email" href="mailto:<?php echo get_field('email_address', 'option'); ?>"><?php echo get_field('email_address', 'option'); ?></a>
+            <a href="<?php echo get_field('facebook', 'option'); ?>"><i class="icons linkedin"></i></a>
+            <a href="<?php echo get_field('instagram', 'option'); ?>"><i class="icons facebook"></i></a>
+            <a href="<?php echo get_field('linkedin', 'option'); ?>"><i class="icons instagram"></i></a>
+          </div>
         <?php
-    			if( is_active_sidebar('header-links-socials') ) {
-    				dynamic_sidebar('header-links-socials');
-    			}
+    			// if( is_active_sidebar('header-links-socials') ) {
+    			// 	dynamic_sidebar('header-links-socials');
+    			// }
     		?>
         </div>
 
