@@ -2,13 +2,13 @@
 /**
  * Theme scripts and styles.
  *
- * @package   WDC\Theme
- * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
- * @copyright Copyright (c) 2019, Intimation Creative
+ * @package   Link365\Theme
+ * @author    Wendell Cabalhin <cabalhinwendell@gmail.com>
+ * @copyright Copyright (c) 2021
  * @copyright MIT
  */
 
-namespace WDC\Theme;
+namespace Link365\Theme;
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 /**
@@ -22,39 +22,28 @@ function enqueue_scripts() {
 
 	wp_register_style( 'normalize', asset( 'css/normalize.css' ), false, '8.0.0' );
 	wp_register_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', false, '5.2.0' );
-	wp_register_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&display=swap', [], CHILD_THEME_VERSION );
-	// wp_register_style( 'bootstrap', asset( '../develop/vendor/bootstrap/css/bootstrap.min.css' ), false, CHILD_THEME_VERSION );
-	wp_enqueue_style( 'wdc', asset( 'css/style.css' ), [
+	wp_register_style( 'bootstrap', asset( '../develop/vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css' ), false, CHILD_THEME_VERSION );
+	wp_enqueue_style( 'link365', asset( 'css/style.css' ), [
 		'normalize',
 		'font-awesome',
-		'google-fonts',
-		// 'bootstrap'
+		'bootstrap'
 	], CHILD_THEME_VERSION );
 
-	wp_register_script( 'swiper', asset( '../develop/vendor/swiper/js/swiper.js' ), [ 'jquery' ], CHILD_THEME_VERSION );
-	wp_register_script( 'classie', asset( '../develop/vendor/classie.js' ), [ 'jquery' ], CHILD_THEME_VERSION );
-	wp_register_script( 'collapse', asset( '../develop/vendor/collapse.js' ), [ 'jquery' ], CHILD_THEME_VERSION );
-	wp_register_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDPTyrj4PIpTT1uS11c_ST6n7n4VUQl57g', [ 'jquery' ], CHILD_THEME_VERSION );
+	wp_enqueue_script( 'bootstrap-js', asset( '../develop/vendor/bootstrap-5.0.2-dist/js/bootstrap.min.js'), ['jquery'], CHILD_THEME_VERSION, true );
+	wp_enqueue_script( 'link365', asset( 'js/link365.js' ), ['jquery'], CHILD_THEME_VERSION, true );
 
-	// Custom home page scripts & styles.
-	// wp_register_script( 'home', asset( 'js/home.js' ), [ 'swiper' ], CHILD_THEME_VERSION, true );
-	// wp_register_style( 'global', asset( 'css/global.css' ), false, CHILD_THEME_VERSION );
-
-	// wp_enqueue_script( 'bootstrap-js', asset( '../develop/vendor/bootstrap/js/bootstrap.min.js'), ['jquery'], CHILD_THEME_VERSION, true );
-	wp_enqueue_script( 'wdc', asset( 'js/wdc.js' ), ['jquery', 'swiper', 'classie', 'collapse', 'google-map'], CHILD_THEME_VERSION, true );
-
-	wp_localize_script( 'wdc', 'ajax_posts', array(
+	wp_localize_script( 'link365', 'ajax_posts', array(
 	  'ajaxurl' => admin_url( 'admin-ajax.php' ),
-	  'noposts' => __('No older posts found', 'wdc'),
+	  'noposts' => __('No older posts found', 'link365'),
 	));
 
 }
 
-add_action('wp_ajax_nopriv_wdc_load_more_post_ajax', __NAMESPACE__ . '\\wdc_load_more_post_ajax');
-add_action('wp_ajax_wdc_load_more_post_ajax', __NAMESPACE__ . '\\wdc_load_more_post_ajax');
+add_action('wp_ajax_nopriv_link365_load_more_post_ajax', __NAMESPACE__ . '\\link365_load_more_post_ajax');
+add_action('wp_ajax_link365_load_more_post_ajax', __NAMESPACE__ . '\\link365_load_more_post_ajax');
 
-if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
-	function wdc_load_more_post_ajax() {
+if ( ! function_exists( 'link365_ajax_load_more_post' ) ) {
+	function link365_load_more_post_ajax() {
 		$out = '';
 		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
 		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
@@ -82,7 +71,7 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 				if( $post_type == 'testimonials' ) {
 						$out .= '<section id="divider_thin">
 						  <div class="container">
-						    <div class="img_quote m-auto"><img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Quote_ORANGE.svg"></div>
+						    <div class="img_quote m-auto"><img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Quote_ORANGE.svg"></div>
 						    <div class="divider-thin m-auto"></div>
 						  </div>
 						</section>';
@@ -115,8 +104,8 @@ if ( ! function_exists( 'wdc_ajax_load_more_post' ) ) {
 							// $out .='<img src="'. $featured_img_url .'">';
 							$out .='<div class="img_box" style="background-image: url('. $featured_img_url .');"></div>';
 						else :
-							// $out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg'. '" class="img-dummy">';
-							$out .= '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/WDC_Logo_Marker.svg);"></div>';
+							// $out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Logo_Marker.svg'. '" class="img-dummy">';
+							$out .= '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Logo_Marker.svg);"></div>';
 						endif;
 
 							$headline = get_the_title($ID);

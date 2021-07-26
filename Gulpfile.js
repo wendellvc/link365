@@ -30,15 +30,14 @@ const uglify = require('gulp-uglify');
 const config = {
 	manifest: 'assets.json',
 	project: {
-		name: 'WDC',
-		textDomain: 'wdc',
+		name: 'Link365',
+		textDomain: 'link365',
 		destPath: 'develop/languages/',
-		localURL: 'https://wdc.test/'
+		localURL: 'https://link365.test/'
 	},
 	scss: [
 		{
 			src: [
-				'develop/vendor/swiper/css/swiper.min.css',
 				'develop/scss/global.scss',
 				'develop/scss/style.scss'
 			],
@@ -54,10 +53,9 @@ const config = {
 	js: [
 		{
 			src: [
-				'develop/vendor/swiper/js/swiper.min.js',
-				'develop/js/wdc.js'
+				'develop/js/link365.js'
 			],
-			destFileName: 'wdc.js',
+			destFileName: 'link365.js',
 			destPath: 'assets/js/'
 		}
 	]

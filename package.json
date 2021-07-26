@@ -1,20 +1,20 @@
 {
-  "name": "wdc",
+  "name": "link365",
   "version": "0.1.0",
-  "description": "A simple starter theme for WordPress projects, developed by Intimation Creative.",
-  "homepage": "https://intimation.uk",
+  "description": "A simple starter custom theme for WordPress projects.",
+  "homepage": "",
   "keywords": [
-    "WDC",
+    "Link365",
     "Genesis",
     "WordPress",
     "child theme"
   ],
   "bugs": {
-    "url": "https://intimation.dev/wdc/theme/issues"
+    "url": "https://github.com/wendellvc/link365/issues"
   },
   "license": "MIT",
-  "author": "Craig Simpson <craig.simpson@intimation.uk>",
-  "repository": "https://intimation.dev/wdc/theme.git",
+  "author": "Wendell Cabalhin <cabalhinwendell@gmail.com>",
+  "repository": "https://github.com/wendellvc/link365/theme.git",
   "devDependencies": {
     "autoprefixer": "^9.6.1",
     "browser-sync": "^2.26.7",
@@ -44,5 +44,6 @@
   "browserslist": [
     "last 2 version",
     "> 1%"
-  ]
+  ],
+  "dependencies": {}
 }

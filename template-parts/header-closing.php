@@ -2,9 +2,9 @@
 /**
  * View: header closing divs and nav header menu.
  *
- * @package   WDC\Theme
- * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
- * @copyright Copyright (c) 2018, Intimation Creative Ltd
+ * @package   Link365\Theme
+ * @author    Wendell Cabalhin <cabalhinwendell@gmail.com>
+ * @copyright Copyright (c) 2018
  * @license   MIT
  */
 
@@ -32,26 +32,11 @@
 
 ?>
       <div id="btn_toggler_menu_wrapper" class="d-flex flex-column align-items-end float-right w-100">
-        <div class="header-socials-wrapper">
-          <div class="textwidget custom-html-widget">
-            <a id="tel" href="tel:<?php echo get_field('phone', 'option'); ?>"><?php echo get_field('phone', 'option'); ?></a>
-            <a id="email" href="mailto:<?php echo get_field('email_address', 'option'); ?>"><?php echo get_field('email_address', 'option'); ?></a>
-            <a href="<?php echo get_field('facebook', 'option'); ?>"><i class="icons linkedin"></i></a>
-            <a href="<?php echo get_field('instagram', 'option'); ?>"><i class="icons facebook"></i></a>
-            <a href="<?php echo get_field('linkedin', 'option'); ?>"><i class="icons instagram"></i></a>
-          </div>
-        <?php
-    			// if( is_active_sidebar('header-links-socials') ) {
-    			// 	dynamic_sidebar('header-links-socials');
-    			// }
-    		?>
-        </div>
-
         <div class="navbar-wrapper w-100">
-        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar_menu_content" aria-controls="navbar_menu_content" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars text-white"></i>
-        </button>
-        <?php wp_nav_menu( $args ); ?>
+          <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar_menu_content" aria-controls="navbar_menu_content" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+          </button>
+          <?php wp_nav_menu( $args ); ?>
         </div>
       </div>
     </nav>

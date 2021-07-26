@@ -2,13 +2,13 @@
 /**
  * Theme setup.
  *
- * @package   WDC\Theme
- * @author    Craig Simpson <craig.simpson@intimation.uk>
- * @copyright Copyright (c) 2019, Intimation Creative
+ * @package   Link365\Theme
+ * @author    Wendell Cabalhin <cabalhinwendell@gmail.com>
+ * @copyright Copyright (c) 2021
  * @copyright MIT
  */
 
-namespace WDC\Theme;
+namespace Link365\Theme;
 
 add_action( 'genesis_setup', __NAMESPACE__ . '\\theme_setup', 15 );
 /**
@@ -29,7 +29,7 @@ function theme_setup() {
 		],
 		'genesis-footer-widgets'      => 4,
 		'genesis-menus'               => [
-			'primary' => __( 'Primary Menu', 'wdc' ),
+			'primary' => __( 'Primary Menu', 'link365' ),
 		],
 		'genesis-responsive-viewport' => null,
 		'genesis-structural-wraps'    => [
@@ -59,96 +59,3 @@ function theme_setup() {
 	array_map( 'add_theme_support', array_keys( $theme_support ), $theme_support );
 
 }
-
-add_action( 'init', __NAMESPACE__ . '\\add_image_sizes' );
-/**
- * Add theme specific image sizes.
- *
- * @since 0.1.0
- *
- * @return void
- */
-function add_image_sizes() {
-
-	$image_sizes = [
-		'banner-image' => [ 1280, 800, true ],
-	];
-
-	array_walk( $image_sizes, function ( $args, $name ) {
-		add_image_size( $name, $args[0], $args[1], isset( $args[2] ) ? $args[2] : false );
-	} );
-
-}
-
-function wdc_acf_google_map_api( $api ){
-
-	$api['key'] = 'AIzaSyDPTyrj4PIpTT1uS11c_ST6n7n4VUQl57g';
-
-	return $api;
-
-}
-
-add_filter('acf/fields/google_map/api', __NAMESPACE__ . '\\wdc_acf_google_map_api');
-
-function wdc_acf_init() {
-
-	acf_update_setting('google_api_key', 'AIzaSyDPTyrj4PIpTT1uS11c_ST6n7n4VUQl57g');
-}
-
-add_action('acf/init', __NAMESPACE__ . '\\wdc_acf_init');
-
-// Include the Google Analytics Tracking Code (ga.js)
-// @ https://developers.google.com/analytics/devguides/collection/gajs/
-function google_analytics_tracking_code() {
-
-	$propertyID = 'UA-173142231-1'; // GA Property ID
-
-	//if ($options['ga_enable']) { ?>
-
-		<script type="text/javascript">
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', '<?php echo $propertyID; ?>']);
-		  _gaq.push(['_trackPageview']);
-
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		</script>
-
-<?php
-	// }
-}
-
-// include GA tracking code before the closing head tag
-add_action('wp_head',  __NAMESPACE__ . '\\google_analytics_tracking_code');
-
-// OR include GA tracking code before the closing body tag
-// add_action('wp_footer', __NAMESPACE__ . '\\google_analytics_tracking_code');
-
-
-/*
-** Theme Option Settings
-*/
-$parent = acf_add_options_page(array(
-	'page_title'    => 'Theme Settings',
-	'menu_title'    => 'Theme Option Settings',
-	'menu_slug'     => 'theme-settings',
-	'capability'    => 'administrator',
-	'redirect'      => false
-));
-
-acf_add_options_sub_page(array(
-	'page_title' 	=> 'APIs',
-	'menu_title' 	=> 'API Settings',
-	'parent_slug' 	=> $parent['menu_slug'],
-));
-
-function add_gf_cap()
-{
-    $role = get_role( 'editor' );
-    $role->add_cap( 'gform_full_access' );
-}
-
-add_action( 'admin_init', __NAMESPACE__ . '\\add_gf_cap' );

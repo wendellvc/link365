@@ -2,13 +2,13 @@
 /**
  * Theme markup customizations.
  *
- * @package   WDC\Theme
- * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
- * @copyright Copyright (c) 2019, Intimation Creative
+ * @package   Link365\Theme
+ * @author    Wendell Cabalhin <cabalhinwendell@gmail.com>
+ * @copyright Copyright (c) 2021
  * @copyright MIT
  */
 
-namespace WDC\Theme;
+namespace Link365\Theme;
 
 add_action( 'genesis_setup', __NAMESPACE__ . '\\theme_markup', 20 );
 /**
@@ -56,7 +56,7 @@ function theme_markup() {
 
 }
 
-add_action( 'genesis_doctype', __NAMESPACE__ . '\\wdc_do_doctype' );
+add_action( 'genesis_doctype', __NAMESPACE__ . '\\link365_do_doctype' );
 /**
  * Add no-js class to html tag, and immediately remove it with JS.
  *
@@ -66,13 +66,13 @@ add_action( 'genesis_doctype', __NAMESPACE__ . '\\wdc_do_doctype' );
  *
  * @return void
  */
-function wdc_do_doctype() {
+function link365_do_doctype() {
 	include locate_template( 'template-parts/doctype.php' );
 }
 
 
-add_filter( 'genesis_attr_site-header', __NAMESPACE__ . '\\wdc_add_class' );
-function wdc_add_class( $attributes ) {
+add_filter( 'genesis_attr_site-header', __NAMESPACE__ . '\\link365_add_class' );
+function link365_add_class( $attributes ) {
 
  $attributes['class'] = 'site-header sticky-top';
  return $attributes;
@@ -105,7 +105,6 @@ function custom_genesis_header_markup_close() {
 		'context' => 'site-header',
 	) );
 }
-
 
 add_filter( 'genesis_attr_site-description', __NAMESPACE__ . '\\custom_add_site_description_class' );
 /**
@@ -213,7 +212,7 @@ add_action( 'widgets_init',  __NAMESPACE__ . '\\register_custom_widgets', 5 );
  * @return void
  */
 function register_custom_widgets() {
-	/*register_sidebar( array(
+	register_sidebar( array(
 	   'name'          => __( 'Header Socials' ),
 	   'id'            => 'header-links-socials',
 	   'description'   => __( 'Widgets in this area will be shown on header area.' ),
@@ -221,7 +220,7 @@ function register_custom_widgets() {
 	   'after_widget'  => '',
 	   'before_title'  => '',
 	   'after_title'   => '',
-	) );*/
+	) );
 
 	register_sidebar( array(
 	   'name'          => __( 'Footer Credits' ),
@@ -233,40 +232,10 @@ function register_custom_widgets() {
 	   'after_title'   => '',
 	) );
 
-	register_sidebar( array(
-	   'name'          => __( 'Company Registration' ),
-	   'id'            => 'company-registration',
-	   'description'   => __( 'Widgets in this area will be shown on footer area.' ),
-	   'before_widget' => '',
-	   'after_widget'  => '',
-	   'before_title'  => '',
-	   'after_title'   => '',
-	) );
-
-	register_sidebar( array(
-	   'name'          => __( 'Footer Socials' ),
-	   'id'            => 'footer-socials',
-	   'description'   => __( 'Widgets in this area will be shown on footer area.' ),
-	   'before_widget' => '',
-	   'after_widget'  => '',
-	   'before_title'  => '',
-	   'after_title'   => '',
-	) );
-
-
-	register_sidebar( array(
-	   'name'          => __( 'Share Button' ),
-	   'id'            => 'btn-share',
-	   'description'   => __( 'Widgets in this area will be shown on single post.' ),
-	   'before_widget' => '',
-	   'after_widget'  => '',
-	   'before_title'  => '',
-	   'after_title'   => '',
-	) );
 }
 
 
-add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\wdc_lazy_load_images' );
+add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\link365_lazy_load_images' );
 /**
  * Filter in the new loading attribute on images.
  *
@@ -274,7 +243,7 @@ add_filter( 'wp_get_attachment_image_attributes', __NAMESPACE__ . '\\wdc_lazy_lo
  *
  * @return array
  */
-function wdc_lazy_load_images( $attributes ) {
+function link365_lazy_load_images( $attributes ) {
 	return array_merge( $attributes, [
 		'loading' => 'lazy'
 	] );

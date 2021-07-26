@@ -2,13 +2,13 @@
 /**
  * Front page template.
  *
- * @package   WDC\Theme
- * @author    Wendell Cabalhin <wendell.cabalhin@intimation.co.uk>
- * @copyright Copyright (c) 2018, Intimation Creative Ltd
+ * @package   Link365\Theme
+ * @author    Wendell Cabalhin <cabalhinwendell@gmail.com>
+ * @copyright Copyright (c) 2018
  * @license   MIT
  */
 
-add_action( 'wp_head', 'wdc_front_page_setup', 5 );
+add_action( 'wp_head', 'link365_front_page_setup', 5 );
 /**
  * Build our custom front page.
  *
@@ -16,7 +16,7 @@ add_action( 'wp_head', 'wdc_front_page_setup', 5 );
  * @since 1.0.0
  *
  */
-function wdc_front_page_setup() {
+function link365_front_page_setup() {
 
 	// Load home page scripts and styles.
 	wp_enqueue_style( 'home' );
@@ -40,7 +40,6 @@ function wdc_front_page_setup() {
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
-
 
 }
 

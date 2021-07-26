@@ -1,13 +1,11 @@
 {
-  "name": "wdc/theme",
+  "name": "link365/link365",
   "type": "wordpress-theme",
-  "description": "A simple starter theme for WordPress projects, developed by Intimation Creative.",
-  "homepage": "https://intimation.uk",
+  "description": "A simple starter custom theme for WordPress projects.",
   "authors": [
     {
       "name": "Wendell Cabalhin",
-      "email": "wendell.cabalhin@intimation.co.uk",
-      "homepage": "https://intimation.uk",
+      "email": "cabalhinwendell@gmail.com",
       "role": "Developer"
     }
   ],

@@ -19,7 +19,7 @@
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="wdc" />
+			<property name="text_domain" type="array" value="link365" />
 		</properties>
 	</rule>
 	<rule ref="WordPress.WP.DeprecatedFunctions">

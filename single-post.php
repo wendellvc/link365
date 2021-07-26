@@ -2,13 +2,13 @@
 /**
 * Single post/ event template.
 *
-* @package   WDC\Theme
-* @author    Wendell cabalhin <wendell.cabalhin@intimation.co.uk>
-* @copyright Copyright (c) 2019, Intimation Creative
+* @package   Link365\Theme
+* @author    Wendell cabalhin <cabalhinwendell@gmail.com>
+* @copyright Copyright (c) 2021
 * @license   MIT
 **/
 
-add_action( 'wp_head', 'wdc_blog_single_setup' );
+add_action( 'wp_head', 'link365_blog_single_setup' );
 /**
  * Build our archive template.
  *
@@ -16,13 +16,13 @@ add_action( 'wp_head', 'wdc_blog_single_setup' );
  *
  * @return void
  */
-function wdc_blog_single_setup() {
+function link365_blog_single_setup() {
 
 	// Force full width content layout.
 	add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 
 	// Add body class.
-	add_action( 'body_class', 'wdc_output_flex_body_class' );
+	add_action( 'body_class', 'link365_output_flex_body_class' );
 
 	// Remove all of the extra markup around <main>.
 	add_filter( 'genesis_markup_site-inner', '__return_null' );
@@ -48,26 +48,26 @@ function wdc_blog_single_setup() {
 	remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 	// Attach custom content.
-	add_action( 'genesis_before_loop', 'wdc_output_posts_wrapper_open' );
+	add_action( 'genesis_before_loop', 'link365_output_posts_wrapper_open' );
 
 	/* post title, featured image, date, author */
-	add_action( 'genesis_before_loop', 'wdc_output_posts_heading_metas' );
+	add_action( 'genesis_before_loop', 'link365_output_posts_heading_metas' );
 
-	add_action( 'genesis_loop', 'wdc_output_flex_content' );
+	add_action( 'genesis_loop', 'link365_output_flex_content' );
 
 	/* display the previous and nect post */
-	add_action( 'genesis_after_loop', 'wdc_output_share_buttons' );
+	add_action( 'genesis_after_loop', 'link365_output_share_buttons' );
 
 	add_action( 'genesis_after_loop', 'custom_prev_next_post_nav' );
 
-	add_action( 'genesis_after_loop', 'wdc_output_posts_wrapper_close' );
+	add_action( 'genesis_after_loop', 'link365_output_posts_wrapper_close' );
 
 }
 
 /*
 ** start of the home/frontpage contents
 */
-function wdc_output_flex_body_class( $classes ) {
+function link365_output_flex_body_class( $classes ) {
 	return array_merge( [ 'uses-flex-content', 'blog' ], $classes );
 }
 
@@ -78,7 +78,7 @@ function wdc_output_flex_body_class( $classes ) {
  *
  * @return void
  */
-function wdc_output_posts_wrapper_open() {
+function link365_output_posts_wrapper_open() {
 	include locate_template( 'template-parts/posts/listings-wrapper-open.php' );
 }
 
@@ -89,19 +89,19 @@ function wdc_output_posts_wrapper_open() {
  *
  * @return void
  */
-function wdc_output_posts_heading_metas() {
+function link365_output_posts_heading_metas() {
 	include locate_template( 'template-parts/posts/post-meta-heading.php' );
 }
 
-function wdc_output_flex_content() {
+function link365_output_flex_content() {
 	$post_id = get_the_ID(); /* post ID */
 
-	$wdc_page_builder = get_post_meta( $post_id, 'wdc_page_builder', true );
+	$link365_page_builder = get_post_meta( $post_id, 'link365_page_builder', true );
 
 	$post = get_post($post_id);
 	// print_r($post);
-	if( $wdc_page_builder ) :
-		foreach ( $wdc_page_builder as $count => $layout ) {
+	if( $link365_page_builder ) :
+		foreach ( $link365_page_builder as $count => $layout ) {
 			if( $post->post_type == 'post' ) :
 			switch ( $layout ) {
 				case 'single_column':
@@ -125,7 +125,7 @@ function wdc_output_flex_content() {
  *
  * @return void
  */
-function wdc_output_share_buttons() {
+function link365_output_share_buttons() {
 
 	/* SHARE BUTTON */
 	if( is_active_sidebar('btn-share') ) {
@@ -146,7 +146,7 @@ function wdc_output_share_buttons() {
  *
  * @return void
  */
-function wdc_output_posts_wrapper_close() {
+function link365_output_posts_wrapper_close() {
 	include locate_template( 'template-parts/posts/listings-wrapper-close.php' );
 }
 

@@ -3,10 +3,10 @@
  * Partial: Header banner
  *
  * @var int $post_id Post ID
- * @var string $wdc_page_builder Name of current flex content row.
+ * @var string $link365_page_builder Name of current flex content row.
  */
 
- $imgID = get_post_meta( $post_id, 'wdc_page_builder_' . $count . '_image', true );
+ $imgID = get_post_meta( $post_id, 'link365_page_builder_' . $count . '_image', true );
  // echo $imgID;
  $img = wp_get_attachment_image_src($imgID, 'full');
  // $img = genesis_get_image( array($imgID, 'html', 'full') );
