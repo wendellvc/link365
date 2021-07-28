@@ -7,12 +7,12 @@
 @include media(992px) {
   .container { @include wrap(960px); }
   ul.navbar-nav {
-    li { padding: 0 15px;
+    li { /*padding: 0 15px;*/
       a { font-size: 14px; }
     }
 
-    li:first-child { margin-right: 15px; }
-    li:last-child { margin-left: 15px; }
+    // li:first-child { margin-right: 15px; }
+    // li:last-child { margin-left: 15px; }
   }
 
   .page-banner-content-wrapper {
@@ -60,14 +60,14 @@
   .navbar-expand-md .navbar-collapse { display: flex!important; flex-basis: auto; }
   .navbar-expand-md .navbar-nav { flex-direction: row; }
   ul.navbar-nav { color: $color-default-white;
-    li { margin-bottom: 0; padding: 0 8px;
+    li { margin-bottom: 0; /*padding: 0 8px;*/
       a { font-size: 11px; }
     }
 
-    li:first-child { margin-right: 8px; }
+    // li:first-child { margin-right: 8px; }
     li:first-child,
     li:last-child { padding-left: 0; padding-right: 0; }
-    li:last-child { margin-left: 8px; }
+    // li:last-child { margin-left: 8px; }
   }
 
   .header-socials-wrapper { display: block; margin-bottom: 15px; }

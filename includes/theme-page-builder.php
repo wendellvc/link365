@@ -58,69 +58,13 @@ function link365_output_flex_content() {
 	$post = get_post($post_id);
 
 	foreach ( $link365_page_builder as $count => $layout ) {
-		if( $post->post_type == 'page' ) :
-		switch ( $layout ) {
-			case 'header_banner':
-				include locate_template( 'template-parts/flex-content/header-banner.php');
-				break;
-			case 'flashing_banner':
-				include locate_template( 'template-parts/flex-content/flashing-banner.php');
-				break;
-			case 'contact_form':
-				include locate_template( 'template-parts/flex-content/contact-form.php');
-				break;
-			case 'intro_content':
-				include locate_template( 'template-parts/flex-content/intro-heading.php');
-				break;
-			case 'column_grids':
-				include locate_template( 'template-parts/flex-content/column-grids.php');
-				break;
-			case 'boxes_with_ctas':
-				include locate_template( 'template-parts/flex-content/boxes-ctas.php');
-				break;
-			case 'tabs_with_ctas':
-				include locate_template( 'template-parts/flex-content/tabs.php');
-				break;
-			case 'left_vertical_slides':
-				include locate_template( 'template-parts/flex-content/left-vertical-slides.php');
-				break;
-			case 'right_vertical_slides':
-				include locate_template( 'template-parts/flex-content/right-vertical-slides.php');
-				break;
-			case 'divider':
-				include locate_template( 'template-parts/flex-content/divider.php');
-				break;
-			case 'divider_thin':
-				include locate_template( 'template-parts/flex-content/divider-thin.php');
-				break;
-			case 'left_content':
-				include locate_template( 'template-parts/flex-content/left-vertical-content.php');
-				break;
-			case 'right_content':
-				include locate_template( 'template-parts/flex-content/right-vertical-content.php');
-				break;
-			case 'dynamic_boxes':
-				include locate_template( 'template-parts/flex-content/boxes-dynamic.php');
-				break;
-			case 'dynamic_boxes_with_toggle_and_slider':
-				include locate_template( 'template-parts/flex-content/column-grids-with-slider.php');
-				break;
-			case 'gallery':
-				include locate_template( 'template-parts/flex-content/gallery.php');
-				break;
-			case 'gallery_with_items':
-				include locate_template( 'template-parts/flex-content/gallery-items.php');
-				break;
-			case 'map':
-				include locate_template( 'template-parts/flex-content/gmap.php');
-				break;
-			case 'blog_heading':
-				include locate_template( 'template-parts/posts/intro-heading.php');
-				break;
-			case 'blog_contents':
-				include locate_template( 'template-parts/posts/post-contents.php');
-				break;
-		}
+
+		if( $post->post_type == 'invoices' ) :
+			switch ( $layout ) {
+				case 'content_header':
+					include locate_template( 'template-parts/flex-content/content-header.php');
+					break;
+			}
 		endif;
 
 	}

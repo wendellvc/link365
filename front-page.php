@@ -36,11 +36,20 @@ function link365_front_page_setup() {
 	add_filter( 'genesis_markup_content-sidebar-wrap', '__return_null' );
 
 	// Remove the Genesis post title and default loop.
-	remove_action( 'genesis_post_title', 'genesis_do_post_title' );
-	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+	// remove_action( 'genesis_post_title', 'genesis_do_post_title' );
+	// remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	remove_action( 'genesis_loop', 'genesis_do_loop' );
 
+	// Output custom page header.
+	add_action( 'genesis_loop', 'link365_output_invoices_content' );
+
+}
+
+function link365_output_invoices_content() {
+	include locate_template( 'template-parts/cpt-content/invoices-content.php');
 }
 
 genesis();

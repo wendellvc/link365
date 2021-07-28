@@ -4,3 +4,174 @@ a, * { text-decoration: none!important; }
 a:focus { box-shadow: none!important; }
 a, a.btn, img, picture { color: $color-default-black; }
 h2 { line-height: 1; }
+
+body { padding-top: 55px; padding-bottom: 55px; }
+
+/* # Header
+---------------------------------------------------------------------------------------------------- */
+/* Nav Menu */
+.navbar {
+  a { color: $color-default-white; font-size: .875rem; }
+  .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+#menu-main-menu {
+  li {
+    a {
+      color: $color-default-white; 
+      display: block;
+      padding: .5rem 1rem;
+    }
+    &.current_page_item,
+    &.current_page_parent {
+      a {
+        background-color: $color-grey-charlie;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+/* # Page Content
+---------------------------------------------------------------------------------------------------- */
+.page-content {
+  margin-top: 40px;
+  .page-title { font-size: 34px; }
+
+  
+  /* filter and search */
+  .filter-container { margin-bottom: 15px;
+    a { 
+      font-size: 11px;
+      letter-spacing: 0.3px;
+      padding: 3.25px 5px;
+      &.active,
+      &:hover {
+        color: $color-default-white;
+        background-color: $color-grey-charlie;
+      }
+    }
+    #filter_wrapper {
+      form {
+        span#addon-filter { background-color: transparent; padding: 0 10px;
+          svg { margin-right: 5px; height: 15px; }
+        }
+      }
+    }
+
+    #filter_wrapper, 
+    #search_wrapper {
+      form { margin-bottom: 0;
+        span { font-size: 11px; color: $color-grey-charlie; padding: 0.5px 1px 0.5px 10px; border-right: none; background-color: $color-default-white; }
+        input {
+          margin-bottom: 0; color: $color-default-black;
+          max-height: 30px;
+          font-size: 11px;
+          border-left: none;
+          &:focus {
+            border-top: 1px solid #d1d1d1;
+            border-right: 1px solid #d1d1d1;
+            border-bottom: 1px solid #d1d1d1;
+            box-shadow: none;
+          }
+          &::-webkit-input-placeholder,
+          ::-moz-placeholder {
+            color: $color-grey-charlie;
+          }
+        }
+      }
+    }
+
+    .text-end, 
+    .me-lg-auto {
+      a { margin-top: -4px; }
+      .btn-warning {
+        background-color: #ffa22b;
+        border-color: #ffa22b;
+        color: $color-default-white;
+        font-size: 14px;
+      }
+    }
+  }
+
+  /* invoices - table */
+  .invoices {
+    .table-wrapper {
+      background-color: #fff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+    table { 
+      font-size: 11px;
+      thead {
+        tr {
+          th { font-weight: normal; 
+            .form-check { min-height: 17px; }
+          }
+        }
+      }
+      tbody {
+        tr {
+          &:first-child {
+            td {
+              padding: 5px 5px;  color: $color-grey-charlie;
+              &:not(:first-child) {
+                font-size: 9px;
+              }
+              &:first-child {
+                .form-check { min-height: 18px; 
+                  .form-check-input {
+                    height: 14px; width: 14px;
+                  }
+                }
+              }
+            }
+          }
+          td { font-weight: normal; padding: 10px 5px;
+            &:first-child {
+              padding-right: 12px; /*max-width: 50px;*/
+            }
+            &.tbl_text {
+              line-height: 24px;
+              svg {
+                width: 20px;
+                path {
+                  fill: #ffa22b;
+                }
+              }
+              .badge {
+                font-size: 10px; font-weight: normal;
+                &.bg-success {
+                  background-color: #69d0a0 !important;
+                }
+              }
+            }
+            div {
+              &.tbl_text { margin-left: 8px; font-size: 13px; 
+                line-height: 24px;
+              }
+            }
+            .form-check { /*min-height: 18px; */
+              .form-check-input {
+                margin-left: -14px; margin-top: 4px; height: 14px; width: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+/* # Footer
+---------------------------------------------------------------------------------------------------- */
+footer {
+  &.site-footer {
+    .copyright-trademark {
+      font-size: 13px;
+    }
+  }
+}

@@ -21,7 +21,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 function enqueue_scripts() {
 
 	wp_register_style( 'normalize', asset( 'css/normalize.css' ), false, '8.0.0' );
-	wp_register_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', false, '5.2.0' );
+	wp_register_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.15.3/css/all.css', false, '5.2.0' );
 	wp_register_style( 'bootstrap', asset( '../develop/vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css' ), false, CHILD_THEME_VERSION );
 	wp_enqueue_style( 'link365', asset( 'css/style.css' ), [
 		'normalize',

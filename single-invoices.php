@@ -48,19 +48,8 @@ function link365_case_studies_single_setup() {
 	remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 	// Attach custom content.
-	add_action( 'genesis_before_loop', 'link365_output_posts_wrapper_open' );
-
-	/* post title, featured image, date, author */
-	add_action( 'genesis_before_loop', 'link365_output_posts_heading_metas' );
 
 	add_action( 'genesis_loop', 'link365_output_flex_content' );
-
-	/* display the previous and nect post */
-	add_action( 'genesis_after_loop', 'link365_output_share_buttons' );
-
-	add_action( 'genesis_after_loop', 'custom_prev_next_post_nav' );
-
-	add_action( 'genesis_after_loop', 'link365_output_posts_wrapper_close' );
 
 }
 
@@ -74,40 +63,18 @@ function link365_output_flex_body_class( $classes ) {
 add_filter('nav_menu_css_class', 'current_type_nav_class', 10, 2);
 function current_type_nav_class($css_class, $item)
 {
-	if( get_post_type() === 'case-studies' ) {
+	if( get_post_type() === 'invoices' ) {
 		$current_value = 'current_page_parent';
 		$css_class = array_filter($css_class, function ($element) use ($current_value) {
 		  return ($element != $current_value);
 		});
 
-		if( strtolower($item->title) == 'work' ) :
+		if( strtolower($item->title) == 'invoices' ) :
 			array_push($css_class, 'current_page_parent');
 		endif;
 	}
 
 	return $css_class;
-}
-
-/**
- * Output single-post wrapper open.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function link365_output_posts_wrapper_open() {
-	include locate_template( 'template-parts/posts/listings-wrapper-open.php' );
-}
-
-/**
- * Output single-post meta-details.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function link365_output_posts_heading_metas() {
-	include locate_template( 'template-parts/posts/post-meta-heading.php' );
 }
 
 function link365_output_flex_content() {
@@ -134,48 +101,5 @@ function link365_output_flex_content() {
 	endif;
 
 }
-
-
-/**
- * Output single-post wrapper close.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function link365_output_share_buttons() {
-
-	/* SHARE BUTTON */
-	if( is_active_sidebar('btn-share') ) {
-		echo '<div class="container">';
-			echo '<div class="d-flex justify-content-center">';
-				echo '<div class="shareit-buttons mt-2 mb-2">';
-				dynamic_sidebar('btn-share');
-				echo '</div>';
-			echo '</div>';
-		echo '</div>';
-	}
-}
-
-/**
- * Output single-post wrapper close.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function link365_output_posts_wrapper_close() {
-	include locate_template( 'template-parts/posts/listings-wrapper-close.php' );
-}
-
-function custom_prev_next_post_nav() {
-	// if( previous_post_link() || next_post_link() ) :
-		echo '<div class="adjacent-entry-pagination pagination">';
-		previous_post_link( '<div class="pagination-previous alignleft d-flex align-items-center justify-content-center"> %link</div>', '<span class="adjacent-post-link">&laquo; %title</span>' );
-		next_post_link( '<div class="pagination-next alignright d-flex align-items-center justify-content-center"> %link</div>', '<span>%title &raquo;</span>' );
-		echo '</div><!-- .prev-next-navigation -->';
-	// endif;
-}
-
 
 genesis();

@@ -74,7 +74,7 @@ function link365_do_doctype() {
 add_filter( 'genesis_attr_site-header', __NAMESPACE__ . '\\link365_add_class' );
 function link365_add_class( $attributes ) {
 
- $attributes['class'] = 'site-header sticky-top';
+ $attributes['class'] = 'site-header position-relative';
  return $attributes;
 }
 
@@ -136,28 +136,6 @@ add_action( 'custom_before_header_wrap', __NAMESPACE__ . '\\custom_output_before
 function custom_output_before_header_wrap() {
 
 	include locate_template( 'template-parts/header-opening.php' );
-
-	// Set what goes inside the site-title tags.
-	$title = $alt = '';
-	if ( get_header_image() ) :
-		$alt = esc_attr( get_bloginfo( 'name' ) ) ;
-		$title = $alt .' - '. esc_attr( get_bloginfo( 'description' ) );
-		$logo = '<img  src="' . get_header_image() . '" width="' . esc_attr( get_custom_header()->width ) . '" height="' . esc_attr( get_custom_header()->height ) . '" alt="'. $alt .'">';
-	else :
-		$logo = $alt;
-	endif;
-
-	$inside = sprintf( '<a href="%s" class="%s" title="%s">%s</a>', trailingslashit( home_url() ), 'navbar-brand', $title, $logo );
-	// Determine which wrapping tags to use - changed is_home to is_front_page to fix Genesis bug.
-	$wrap = is_front_page() && 'title' === genesis_get_seo_option( 'home_h1_on' ) ? 'h1' : 'p';
-	// A little fallback, in case an SEO plugin is active - changed is_home to is_front_page to fix Genesis bug.
-	$wrap = is_front_page() && ! genesis_get_seo_option( 'home_h1_on' ) ? 'h1' : $wrap;
-	// And finally, $wrap in h1 if HTML5 & semantic headings enabled.
-	$wrap = genesis_html5() && genesis_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
-	// $title = sprintf( '<%1$s %2$s>%3$s</%1$s>', $wrap, genesis_attr( 'site-title' ), $inside );
-	// $title = sprintf ( '<%s class="site-title mr-auto" itemprop="headline">%s</%s>', $wrap, $inside, $wrap );
-	$title = sprintf ( '<%s class="site-title float-left" itemprop="headline">%s</%s>', $wrap, $inside, $wrap );
-	echo $title;
 
 }
 
