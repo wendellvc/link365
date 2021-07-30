@@ -39,113 +39,170 @@ function enqueue_scripts() {
 
 }
 
-add_action('wp_ajax_nopriv_link365_load_more_post_ajax', __NAMESPACE__ . '\\link365_load_more_post_ajax');
-add_action('wp_ajax_link365_load_more_post_ajax', __NAMESPACE__ . '\\link365_load_more_post_ajax');
 
-if ( ! function_exists( 'link365_ajax_load_more_post' ) ) {
-	function link365_load_more_post_ajax() {
-		$out = '';
-		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
-		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
-		$categories = ( isset($_POST['cat']) ? explode('_', $_POST['cat']) : '' );
-		$post_type = (isset($_POST['post_type'])) ? $_POST['post_type'] : '';
+add_action('wp_ajax_nopriv_link365_load_filter_status_post_ajax', __NAMESPACE__ . '\\link365_load_filter_status_post_ajax');
+add_action('wp_ajax_link365_load_filter_status_post_ajax', __NAMESPACE__ . '\\link365_load_filter_status_post_ajax');
+
+if ( ! function_exists( 'link365_load_filter_status_post_ajax' ) ) {
+	function link365_load_filter_status_post_ajax() {
+
+		$post_per_page = ( isset( $_POST['ppp'] ) ? $_POST['ppp'] : 5 );
+		$status = ( isset( $_POST['status'] ) ? $_POST['status'] : '' );
+		$paged = (isset($_POST['page'])) ? $_POST['page'] : 1;
+		$html = '';
 		$ctr = 1;
 
 		header("Content-Type: text/html");
 
-		if( !empty($post_type) ) :
-			$args = array( 'posts_per_page' => $ppp, 'post_type' => $post_type, 'paged' => $page );
-		else :
-			$args = array( 'posts_per_page' => $ppp, 'cat' => $categories, 'paged' => $page );
-		endif;
+		if( $status == 'all' ) {
+			$meta_query = '';
+		} else {
+			$meta_query = array(
+				array(
+				  'key' => 'status',
+				  'value' => $status,
+				  'compare' => '='
+				)
+			);
+		}
 
-		$posts = get_posts( $args );
+		$args = array(
+			'post_type' => 'invoices',
+			'post_status' => 'publish',
+			'orderby' => array( 'post_date' => 'ASC'),
+			// 'posts_per_page' => $post_per_page,
+			'posts_per_page' => -1,
+			'paged' => $paged,
+			'meta_query' => $meta_query
+		);
+		
+		$invoices = get_posts( $args );
 
-		if ($posts) :
-			foreach ( $posts as $post ) : setup_postdata( $post );
-				$ID = $post->ID;
-
-				/*
-				** FOR TESTIMONIALS
-				*/
-				if( $post_type == 'testimonials' ) {
-						$out .= '<section id="divider_thin">
-						  <div class="container">
-						    <div class="img_quote m-auto"><img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Quote_ORANGE.svg"></div>
-						    <div class="divider-thin m-auto"></div>
-						  </div>
-						</section>';
-						$out .= '<div class="row w-100 text-center testimonial">';
-						$out .= '<div class="t_details">'. wp_kses_post( wpautop( $post->post_content ) ) .'</div>';
-						$out .= '<div class="t_logo"><img src="'. get_the_post_thumbnail_url($ID, 'full') .'"></div>';
-						$out .= '</div>';
-
-
-				/*
-				** FOR CAREERS
-				*/
-				} elseif ( $post_type == 'careers' ) {
-
-
-				/*
-				** FOR BLOG POSTS, AND CASE STUDIES
-				*/
-				} else {
-
-					$featured_img_url = get_the_post_thumbnail_url($ID, 'full');
-
-					if ( $ctr == 1 ) :
-						$out .= '<div class="row w-100 text-center">';
-					endif;
-
-					$out .= '<div class=" d-inline-block box-wrapper position-relative '. ( $ctr == 1 ? 'first' : ( $ctr == 2 ? 'middle' : ( $ctr == 3 ? 'last' : '' ) ) ) .'">
-						<div class="box box-shadow text-center">';
-						if($featured_img_url) :
-							// $out .='<img src="'. $featured_img_url .'">';
-							$out .='<div class="img_box" style="background-image: url('. $featured_img_url .');"></div>';
-						else :
-							// $out .= '<img src="'. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Logo_Marker.svg'. '" class="img-dummy">';
-							$out .= '<div class="img_box" style="background-image: url('. get_stylesheet_directory_uri() .'/assets/images/svg/Link365_Logo_Marker.svg);"></div>';
-						endif;
-
-							$headline = get_the_title($ID);
-							if( strlen($headline) > 40 )
-								$headline = substr($headline, 0, 40).'...';
-
-							$out .= '<div class="'. ( $post_type == 'case-studies' ? 'title' : 'the_title text-white' ) .'">'. $headline .'</div>';
-							$out .= '<div class="date-author">'. get_the_date( 'd/m/Y', $post->ID ) .' - by <a href="'. get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ). '?authorid='. $post->post_author .'" title="View Author Listing">'. the_author() .'</a></div>';
-
-							if( !empty(get_the_excerpt($ID)) ) :
-								$out .= '<div class="content-excerpt">';
-								$excerpt = get_the_excerpt($ID);
-								if( strlen($excerpt) > 150 )
-                  $excerpt = substr($excerpt, 0, 150).'...';
-								$out .= $excerpt;
-								$out .= '</div>';
-							endif;
-
-							$out .= '<div class="call_to_action justify-content-center">
-								<a href="'. esc_url( get_the_permalink($ID) ) .'" class="bg-less">
-									<span class="btn_arrow"></span>
-								</a>
-							</div>
+		$html .= '<table class="table table-sm table-responsive">
+					<tbody>
+					<tr>
+						<td class="d-flex flex-wrap align-items-center justify-content-center">
+						<div class="form-check custom-control custom-checkbox mb-0">
+							<input class="form-check-input mb-0" type="checkbox" value="" id="checkbox_all">
 						</div>
-					</div>';
+						</td>
+						<td>
+						<div class="d-flex flex-wrap align-items-center">ID</div>
+						</td>
+						<td>RESTAURANT</td>
+						<td>STATUS</td>
+						<td>START DATE</td>
+						<td>END DATE</td>
+						<td>TOTAL</td>
+						<td>FEES</td>
+						<td>TRANSFER</td>
+						<td>ORDERS</td>
+						<td></td>
+					</tr>';
+		
+		if ($invoices) :
+			foreach ( $invoices as $key => $invoice ) : setup_postdata( $invoice );
 
-					if ( $ctr == 3 ) :
-						$out .= '</div>';
-					endif;
+				$ID = $invoice->ID;
 
-					$ctr++;
-					$ctr = ( $ctr > 3 ? 1 : $ctr );
+				// status
+                if( strtolower($status) == 'pending' )
+                  $class = 'bg-warning';
+                if( strtolower($status) == 'ongoing' )
+                  $class = 'bg-light text-dark';
+                if( strtolower($status) == 'verified' )
+                  $class = 'bg-success';
+                if( strtolower($status) == 'paid' )
+                  $class = 'bg-info';
+                
+                // start date
+                $start = get_post_meta($invoice->ID, 'start_date');
+                
+                // end date
+                $end = get_post_meta($invoice->ID, 'end_date');
+                
+                // end date
+                $total = get_post_meta($invoice->ID, 'total');
+                
+                // end date
+                $fees = get_post_meta($invoice->ID, 'fees');
+                
+                // end date
+                $transfer = get_post_meta($invoice->ID, 'transfer');
+                
+                // end date
+                $orders = get_post_meta($invoice->ID, 'orders');
 
-				}
+				$html .= '<tr>
+					<td class="d-flex flex-wrap align-items-center justify-content-center">
+					<div class="form-check custom-control custom-checkbox mb-0">
+						<input class="form-check-input mb-0" type="checkbox" value="" id="checkbox_select">
+					</div>
+					</td>
+					<td class="tbl_text">#'. str_pad($invoice->ID, 5, '0', STR_PAD_LEFT) .'</td>
+					<td>
+					<div class="d-flex">
+						<svg class="bd-placeholder-img rounded d-block" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 20x20" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
+						<div class="tbl_text">'. $invoice->post_title .'</div>
+					</div>
+					</td>
+					<td class="tbl_text"><span class="badge rounded-pill '. $class .'">'. strtoupper($status) .'</span></td>
+					<td class="tbl_text">'. ( !empty($start[0]) ? $start[0] : '' ) .'</td>
+					<td class="tbl_text">'. ( !empty($end[0]) ? $end[0] : '' ) .'</td>
+					<td class="tbl_text">'. ( !empty($total[0]) ? 'HK$'. $total[0] : '' ) .'</td>
+					<td class="tbl_text">'. ( !empty($fees[0]) ? 'HK$'. $fees[0] : '' ) .'</td>
+					<td class="tbl_text">'. ( !empty($transfer[0]) ? 'HK$'. $transfer[0] : '' ) .'</td>
+					<td class="tbl_text">'. ( !empty($orders[0]) ? $orders[0] : '' ) .'</td>
+					<td class="tbl_text">
+					'. file_get_contents(get_stylesheet_directory_uri().'/assets/images/svg/cloud-download.svg') .'
+					</td>
+				</tr>';
+					
+				endforeach;
+			endif;
 
-			endforeach;
-		endif;
+			$html .= '</tbody>
+				</table>';
 
 		wp_reset_postdata();
-		wp_die($out);
+		wp_die($html);
+		ob_clean();
+	}
+}
+
+add_action('wp_ajax_nopriv_link365_update_posts_status_ajax', __NAMESPACE__ . '\\link365_update_posts_status_ajax');
+add_action('wp_ajax_link365_update_posts_status_ajax', __NAMESPACE__ . '\\link365_update_posts_status_ajax');
+
+if ( ! function_exists( 'link365_update_posts_status_ajax' ) ) {
+	function link365_update_posts_status_ajax() {
+
+		$strIDs = ( isset( $_POST['IDs'] ) ? $_POST['IDs'] : '' );
+		$html  = '';
+
+		$arrayIDs = explode(',', $strIDs);
+
+		header("Content-Type: text/html");
+
+		if( !empty( $arrayIDs ) ) {
+			foreach( $arrayIDs as $key => $postid ) {
+				update_post_meta($postid, 'status', 'paid'); // We will update the field.
+			}
+
+			$html .= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<i class="far fa-check-circle"></i>
+				<strong>Success</strong> The record/s is/are now marked as paid.
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>';
+		} else {
+			$html .= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<i class="fas fa-exclamation-triangle"></i>
+				<strong>Warning</strong> No record to be updated.
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>';
+		}
+
+		wp_reset_postdata();
+		wp_die($html);
 		ob_clean();
 	}
 }
