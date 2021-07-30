@@ -28,7 +28,7 @@ body { padding-top: 55px; padding-bottom: 55px; }
     &.current_page_item,
     &.current_page_parent {
       a {
-        background-color: $color-grey-charlie;
+        background-color: $color-grey-charlie; 
         border-radius: 5px;
       }
     }
@@ -103,7 +103,7 @@ body { padding-top: 55px; padding-bottom: 55px; }
       background-color: #fff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     }
     table { 
-      font-size: 11px;
+      font-size: 11px; 
       thead {
         tr {
           th { font-weight: normal; 
@@ -112,30 +112,31 @@ body { padding-top: 55px; padding-bottom: 55px; }
         }
       }
       tbody {
-        tr {
+        tr { transition: all 0.3s ease;
           &:first-child {
             td {
-              padding: 5px 5px;  color: $color-grey-charlie;
+              padding: 5px 5px; color: $color-grey-charlie; line-height: 24px;
               &:not(:first-child) {
                 font-size: 9px;
               }
               &:first-child {
-                .form-check { min-height: 18px; 
+                .form-check {
                   .form-check-input {
                     height: 14px; width: 14px;
                   }
                 }
               }
+              div { line-height: 24px; }
             }
           }
           td { font-weight: normal; padding: 10px 5px;
             &:first-child {
-              padding-right: 12px; /*max-width: 50px;*/
+              padding-right: 12px; 
             }
             &.tbl_text {
               line-height: 24px;
               svg {
-                width: 20px;
+                width: 14px;
                 path {
                   fill: #ffa22b;
                 }
@@ -152,14 +153,44 @@ body { padding-top: 55px; padding-bottom: 55px; }
                 line-height: 24px;
               }
             }
-            .form-check { /*min-height: 18px; */
+            .form-check { 
               .form-check-input {
                 margin-left: -14px; margin-top: 4px; height: 14px; width: 14px;
               }
             }
           }
+          &:not(:first-child):hover {
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            transform:scale(1.03); 
+            height: 100%;
+            td {
+              border: none;   
+            }
+          }
         }
       }
+    }
+  }
+
+  /* pagination */
+  .pagination_wrapper {
+    padding-bottom: 1rem; font-size: 9px; color: $color-grey-charlie;
+    .navigation {
+      .pagination {
+        margin-bottom: 0;
+        .page-item {
+          margin-bottom: 0;
+          .btn-prev {
+            font-size: 13px; padding-top: 2px; padding-bottom: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  #notification {
+    .alert {
+      font-size: 14px; font-weight: normal;
     }
   }
 
