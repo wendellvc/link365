@@ -6,35 +6,45 @@
 // get the title of the custom post type - Invoices
 $title = get_the_title();
 
-$post_per_page = -1;
+$post_per_page = 5;
+$paged = ( get_query_var( 'page' ) ? get_query_var( 'page' ) : 1 );
 
 $args = array(
   'post_type' => 'invoices',
   'post_status' => 'publish',
   'orderby' => array( 'post_date' => 'ASC'),
-  'posts_per_page' => $post_per_page
+  'posts_per_page' => $post_per_page,
+  'paged' => $paged 
 );
 
-$invoices = get_posts( $args );
-// print_r($invoices);
+$invoices = new WP_Query( $args );
+
+$total_pages = $invoices->max_num_pages;
+
 ?>
 
 <section class="page-content <?php echo strtolower($title); ?>">
+
+  <span id="posts_per_page" data-ppp="<?php echo $post_per_page; ?>"></span>
+
   <div class="container">
     <div class="row">
       <div class="col-sm-12 entry-title">
         <h1 class="page-title"><?php echo $title; ?></h1>
       </div>
     </div>
+
+    <div id="notification"></div>
     
+    <!-- start of status filter section -->
     <div class="row">
       <div class="container-fluid filter-container d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <div class="me-lg-auto">
-          <a class="btn btn-default active" href="#" role="button">ALL</a>
-          <a class="btn btn-default" href="#" role="button">ONGOING</a>
-          <a class="btn btn-default" href="#" role="button">VERFIFIED</a>
-          <a class="btn btn-default" href="#" role="button">PENDING</a>
-          <a class="btn btn-default" href="#" role="button">PAID</a>
+          <a class="btn-status-filter-all btn btn-default active" href="<?php echo esc_url( home_url( '/' ) ); ?>" role="button" data-status="all">ALL</a>
+          <a class="btn-status-filter btn btn-default" href="javascript:;" role="button" data-status="ongoing">ONGOING</a>
+          <a class="btn-status-filter btn btn-default" href="javascript:;" role="button" data-status="verified">VERIFIED</a>
+          <a class="btn-status-filter btn btn-default" href="javascript:;" role="button" data-status="pending">PENDING</a>
+          <a class="btn-status-filter btn btn-default" href="javascript:;" role="button" data-status="paid">PAID</a>
         </div>
         <div id="filter_wrapper" class="col-12 col-lg-auto mb-lg-0 me-lg-3">
           <form class="">
@@ -53,15 +63,17 @@ $invoices = get_posts( $args );
           </form>
         </div>
         <div class="text-end">
-          <a class="btn btn-warning" href="#" role="button">Mark as paid</a>
+          <a id="mark_as_paid" class="btn btn-warning" href="javascript:;" role="button">Mark as paid</a>
         </div>
       </div>
     </div>
+    <!-- end of status section -->
     
-
+    <!-- start of table section -->
     <div class="row">
-      <div class="col-sm-12 invoices">
-        <div class="table-wrapper rounded">
+      <div class="col-sm-12 invoices mb-3">
+        <div id="tbl_ajax" class="table-wrapper rounded">
+
           <table class="table table-sm table-responsive">
             <tbody>
               <tr>
@@ -85,12 +97,43 @@ $invoices = get_posts( $args );
               </tr>
             <?php
             if( $invoices ) :
-              foreach( $invoices as $key => $invoice ) :
+              foreach( $invoices->posts as $key => $invoice ) : 
+
+                // status
+                $status = get_post_meta($invoice->ID, 'status');
+                $status = ( !empty( $status[0] ) ? $status[0] : '' ) ;
+                $class = '';
+                if( strtolower($status) == 'pending' )
+                  $class = 'bg-warning';
+                if( strtolower($status) == 'ongoing' )
+                  $class = 'bg-light text-dark';
+                if( strtolower($status) == 'verified' )
+                  $class = 'bg-success';
+                if( strtolower($status) == 'paid' )
+                  $class = 'bg-info';
+                
+                // start date
+                $start = get_post_meta($invoice->ID, 'start_date');
+                
+                // end date
+                $end = get_post_meta($invoice->ID, 'end_date');
+                
+                // end date
+                $total = get_post_meta($invoice->ID, 'total');
+                
+                // end date
+                $fees = get_post_meta($invoice->ID, 'fees');
+                
+                // end date
+                $transfer = get_post_meta($invoice->ID, 'transfer');
+                
+                // end date
+                $orders = get_post_meta($invoice->ID, 'orders');
             ?>
               <tr>
                 <td class="d-flex flex-wrap align-items-center justify-content-center">
                   <div class="form-check custom-control custom-checkbox mb-0">
-                    <input class="form-check-input mb-0" type="checkbox" value="" id="checkbox_all">
+                    <input class="form-check-input mb-0 checkbox_select" name="invoice_id[]" type="checkbox" value="" data-checkboxid="<?php echo $invoice->ID; ?>" id="checkbox_select_<?php echo $invoice->ID; ?>">
                   </div>
                 </td>
                 <td class="tbl_text">#<?php echo str_pad($invoice->ID, 5, '0', STR_PAD_LEFT); ?></td>
@@ -100,13 +143,13 @@ $invoices = get_posts( $args );
                     <div class="tbl_text"><?php echo $invoice->post_title; ?></div>
                   </div>
                 </td>
-                <td class="tbl_text"><span class="badge rounded-pill bg-success"><?php echo strtoupper('VERIFIED'); ?></span></td>
-                <td class="tbl_text">16/08/2018</td>
-                <td class="tbl_text">16/08/2018</td>
-                <td class="tbl_text">HK$2.99</td>
-                <td class="tbl_text">HK$2.99</td>
-                <td class="tbl_text">HK$2.99</td>
-                <td class="tbl_text">20</td>
+                <td class="tbl_text"><span id="status_update_<?php echo $invoice->ID; ?>" class="badge rounded-pill <?php echo $class; ?>"><?php echo strtoupper($status); ?></span></td>
+                <td class="tbl_text"><?php echo ( !empty($start[0]) ? $start[0] : '' ); ?></td>
+                <td class="tbl_text"><?php echo ( !empty($end[0]) ? $end[0] : '' ); ?></td>
+                <td class="tbl_text"><?php echo ( !empty($total[0]) ? 'HK$'. $total[0] : '' ); ?></td>
+                <td class="tbl_text"><?php echo ( !empty($fees[0]) ? 'HK$'. $fees[0] : '' ); ?></td>
+                <td class="tbl_text"><?php echo ( !empty($transfer[0]) ? 'HK$'. $transfer[0] : '' ); ?></td>
+                <td class="tbl_text"><?php echo ( !empty($orders[0]) ? $orders[0] : '' ); ?></td>
                 <td class="tbl_text">
                 <?php echo file_get_contents(get_stylesheet_directory_uri().'/assets/images/svg/cloud-download.svg'); ?>
                 </td>
@@ -117,9 +160,22 @@ $invoices = get_posts( $args );
             ?>
             </tbody>
           </table>
+
+          <!-- start of pagination -->
+          <diV class="pagination_wrapper">
+            <div class="col-sm-12 d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start ps-md-3 pe-md-3">
+              <div class="me-lg-auto">PAGE <span><?php echo $paged; ?></span> OF <?php echo $total_pages; ?></div>
+              <div class="col-12 col-lg-auto mb-lg-0">
+                <?php wpbeginner_numeric_posts_nav( $invoices ); ?>
+              </div>
+            </div>
+          </diV><!-- end of pagination -->
+          
         </div>
       </div>
-    </div>
+    </div><!-- end of table section -->
     
   </div>
 </section>
+
+<?php wp_reset_postdata(); ?>
