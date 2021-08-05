@@ -8,6 +8,12 @@
  * @license   MIT
  */
 
+$element_to_add = '<div class="d-flex">
+<a href="">Wallace Huo</a>
+</div>';
+$items_wrap = '<ul id="%1$s" class="%2$s">%3$s';
+$items_wrap .= sprintf( '</ul>%1$s', $element_to_add );
+
   $args = array(
     'container_class' => 'collapse navbar-collapse',
     'container_id'    => 'navbarCollapse',
@@ -18,14 +24,13 @@
     'after'           => '',
     'link_before'     => '',
     'link_after'      => '',
-    'theme_location'  => 'main_menu'
+    'theme_location'  => 'main_menu',
+    'items_wrap' => $items_wrap
   );
 
 ?>
 
     <?php wp_nav_menu( $args ); ?>
-    <div class="d-flex">
-      <a href="">Wallace Huo</a>
-    </div>
+    
   </div>
 </nav>
